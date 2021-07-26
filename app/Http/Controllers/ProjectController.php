@@ -37,10 +37,8 @@ class ProjectController extends Controller
 
       if (($total_image = $request->total_image) > 1) {
         for ($i = 1; $i < $total_image; $i++) {
-          $image = [];
 
-          array_push($image, $request->file('image' . $i));
-          $validator_image = Validator::make($image, [
+          $validator_image = Validator::make($request->file('image' . $i), [
             'image' . $i    => 'mimes:jpg,jpeg,png'
           ]);
 
@@ -89,7 +87,7 @@ class ProjectController extends Controller
         }
 
         $data = array_merge($project, [
-          'images'  => $project->images,
+          'images'   => $project->images,
           'comments' => $project->comments
         ]);
 
@@ -108,7 +106,10 @@ class ProjectController extends Controller
     {
       return response()->json([
         'message' => 'success display the specified resource',
-        'data' => array_merge($project, ['images' => $project->images])
+        'data' => array_merge($project, [
+          'images' => $project->images,
+          'comments' => $project->comments
+        ])
       ], Response::HTTP_OK);
     }
 
@@ -127,7 +128,10 @@ class ProjectController extends Controller
       try {
         $project->update($request->all());
 
-        $data = array_merge($project, ['images' => $project->images]);
+        $data = array_merge($project, [
+          'images' => $project->images,
+          'comments' => $project->comments
+        ]);
 
         return response()->json([
           'message' => 'success update the specified resource in storage',
@@ -168,7 +172,7 @@ class ProjectController extends Controller
 
     public function getProjectByUser()
     {
-      $projects = Project::where('user_id', Auth::id())->with('images')->get();
+      $projects = Project::where('user_id', Auth::id())->with(['images', 'comments'])->get();
 
       return response()->json([
         'message' => 'success display a listing of the resource',

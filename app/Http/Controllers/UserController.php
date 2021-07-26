@@ -10,6 +10,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -49,7 +50,11 @@ class UserController extends Controller
         $user = User::where('id', Auth::id())->first();
 
         if ($request->password) {
-          $user->password = bcrypt($request->password);
+          if (Hash::check($request->password, Auth::user()->password)) {
+            return response()->json(['message' => "Your current password can't be with new password"], Response::HTTP_UNPROCESSABLE_ENTITY);
+          } else {
+            $user->password = bcrypt($request->password);
+          }
         }
 
         $user->name   = $request->name;
