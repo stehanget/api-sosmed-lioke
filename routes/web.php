@@ -23,7 +23,14 @@ Route::post('login', [AuthController::class, 'login']);
 Route::get('register', [AuthController::class, 'showFormRegister'])->name('register');
 Route::post('register', [AuthController::class, 'register']);
 
+// Home visitor are not logged in
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+//Home visitor are logged in
+Route::get('dashboard', function () {
+  return view('dashboard.index');
+})->name('dashboard');
+
 Route::group(['middleware' => 'auth'], function () {
   Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });

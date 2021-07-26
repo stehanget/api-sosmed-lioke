@@ -1,5 +1,5 @@
 <div class="modal fade" id="auth" tabindex="-1" aria-labelledby="authLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content bg-turquoise animate__animated animate__fadeIn">
             <div class="modal-body p-0">
                 <div class="container-fluid">
@@ -51,11 +51,13 @@
                                         placeholder="Your E-mail" required>
                                 </div>
                                 <div class="mb-2">
-                                    <input type="password" class="form-control" id="password-register"
-                                        placeholder="Your Password" required>
+                                    <input type="number" class="form-control" id="phone-register"
+                                        placeholder="Your Phone Number" required>
                                 </div>
-                                <div>
-                                    <input type="password" class="form-control" id="confirm-password-register"
+                                <div class="mb-2 d-flex gap-2">
+                                    <input type="password" class="form-control col" id="password-register"
+                                        placeholder="Your Password" required>
+                                    <input type="password" class="form-control col" id="confirm-password-register"
                                         placeholder="Confirm Your Password" required>
                                 </div>
                                 <i class="small">Do you have an account ? <a class="login-link" href="#">Login
