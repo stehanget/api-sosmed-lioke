@@ -17,13 +17,13 @@ use App\Http\Controllers\{
 |
 */
 
-Route::get('/', [AuthController::class, 'showFormLogin'])->name('login');
+// Route::get('/', [AuthController::class, 'showFormLogin'])->name('login');
 Route::get('login', [AuthController::class, 'showFormLogin'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::get('register', [AuthController::class, 'showFormRegister'])->name('register');
 Route::post('register', [AuthController::class, 'register']);
- 
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => 'auth'], function () {
-  Route::get('home', [HomeController::class, 'index'])->name('home');
-  Route::get('logout', [AuthController::class, 'logout'])->name('logout'); 
+  Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });

@@ -29,9 +29,10 @@
 
 <body>
 
-    @include('partials.header')
+    @include('partials._header')
 
     <div class="container">
+        @include('partials.modal._auth')
 
         @yield('content')
 
@@ -51,6 +52,7 @@
     <script src="{{ asset('assets/vendor/purecounter/purecounter.js') }}"></script>
     <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/auth.js') }}"></script>
     <script>
         feather.replace()
     </script>
