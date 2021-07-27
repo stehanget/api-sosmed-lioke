@@ -15,10 +15,29 @@ class ProjectController extends Controller
 {
     public function index()
     {
-      $projects = Project::where('visibility', true)->with(['images', 'comments'])->get();
+      if (Auth::check()) {
+        $projects = Project::select('id', 'user_id', 'category_id', 'total_like', 'total_view')
+                    ->with(['comments','category:id,title', 'user:id,name'])
+                    ->with(array('images' => function ($query) {
+                      $query->select('id', 'project_id', 'source');
+                    }))
+                    ->where('visibility', true)
+                    ->get();
+      } else {
+        $projects = Project::select('id', 'user_id', 'category_id', 'total_like', 'total_view')
+                    ->with(['comments','category:id,title', 'user:id,name'])
+                    ->with(array('images' => function ($query) {
+                      $query->select('id', 'project_id', 'source');
+                    }))
+                    ->where('visibility', true)
+                    ->limit(8)
+                    ->get();
+      }
+
       return response()->json([
         'message' => 'success display a listing of the resource',
-        'data' => $projects
+        'data' => $projects,
+        'test'  => Auth::check()
       ], Response::HTTP_OK);
     }
 
@@ -172,7 +191,13 @@ class ProjectController extends Controller
 
     public function getProjectByUser()
     {
-      $projects = Project::where('user_id', Auth::id())->with(['images', 'comments'])->get();
+      $projects = Project::select('id', 'user_id', 'category_id', 'total_like', 'total_view')
+                  ->with(['comments','category:id,title', 'user:id,name'])
+                  ->with(array('images' => function ($query) {
+                    $query->select('id', 'project_id', 'source');
+                  }))
+                  ->where('user_id', Auth::id())
+                  ->get();
 
       return response()->json([
         'message' => 'success display a listing of the resource',

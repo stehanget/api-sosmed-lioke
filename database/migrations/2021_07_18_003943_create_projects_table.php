@@ -19,6 +19,7 @@ class CreateProjectsTable extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->string('title', 64);
             $table->text('description');
+            $table->integer('total_view')->default(0);
             $table->integer('total_like')->default(0);
             $table->boolean('visibility')->default(false);
             $table->timestamps();

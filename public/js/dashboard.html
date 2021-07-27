@@ -1,0 +1,49 @@
+<script>
+    var portofolioData = []
+
+    const getPortofolio = () => {
+        jQuery.ajax({
+            url : `api/projects/by/user`,
+            type : 'GET',
+            dataType:'json',
+            success:function (res) {
+                portofolioData = res.data
+
+                setPortofolio()
+            }
+        })
+    }
+
+    const setPortofolio = () => {
+        let html = ''
+
+        portofolioData.forEach((portofolio) => {
+            html += `<div class="col">
+                        <div class="card border-0">
+                            <div class="card-header p-0">
+                                <img src="${portofolio.images[0].source}" alt="...">
+                            </div>
+                            <div class="card-body px-0 py-2">
+                                <div class="d-flex gap-2">
+                                    <img src="img/team/team-3.jpg" class="rounded-circle" width="24"
+                                        height="24">
+                                    <span>${portofolio.user.name}</span>
+                                    <div class="feedback ms-auto">
+                                        <span><i data-feather="eye"></i> <small>${portofolio.total_view}</small> </span>
+                                        <span><i data-feather="heart"></i> <small>${portofolio.total_like}</small></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+        })
+
+        html += `<button class="btn" data-bs-toggle="modal" data-bs-target="#add-image">ADD IMAGE</button>`
+
+        $('#row-portofolio').html(html)
+    }
+
+    $(document).ready(function () {
+        getPortofolio()
+    })
+</script>

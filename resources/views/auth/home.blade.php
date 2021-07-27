@@ -35,99 +35,17 @@
                     </div>
                 </div>
 
-                <div class="row row-cols-4 gap-y" data-aos="fade-up" data-aos-delay="300">
-                    <div class="col">
-                        <div class="card border-0">
-                            <div class="card-header p-0">
-                                <img src="{{ asset('img/team/team-3.jpg') }}" alt="...">
-                            </div>
-                            <div class="card-body px-0 py-2">
-                                <div class="d-flex gap-2">
-                                    <img src="{{ asset('img/team/team-3.jpg') }}" class="rounded-circle" width="24"
-                                        height="24">
-                                    <span> Wildan </span>
-                                    <div class="feedback ms-auto">
-                                        <span><i data-feather="eye"></i> <small>17k</small> </span>
-                                        <span><i data-feather="heart"></i> <small>17k</small></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card border-0">
-                            <div class="card-header p-0">
-                                <img src="{{ asset('img/team/team-3.jpg') }}" alt="...">
-                            </div>
-                            <div class="card-body px-0 py-2">
-                                <div class="d-flex gap-2">
-                                    <img src="{{ asset('img/team/team-3.jpg') }}" class="rounded-circle" width="24"
-                                        height="24">
-                                    <span> Wildan </span>
-                                    <div class="feedback ms-auto">
-                                        <span><i data-feather="eye"></i> <small>17k</small> </span>
-                                        <span><i data-feather="heart"></i> <small>17k</small></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card border-0">
-                            <div class="card-header p-0">
-                                <img src="{{ asset('img/team/team-3.jpg') }}" alt="...">
-                            </div>
-                            <div class="card-body px-0 py-2">
-                                <div class="d-flex gap-2">
-                                    <img src="{{ asset('img/team/team-3.jpg') }}" class="rounded-circle" width="24"
-                                        height="24">
-                                    <span> Wildan </span>
-                                    <div class="feedback ms-auto">
-                                        <span><i data-feather="eye"></i> <small>17k</small> </span>
-                                        <span><i data-feather="heart"></i> <small>17k</small></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card border-0">
-                            <div class="card-header p-0">
-                                <img src="{{ asset('img/team/team-3.jpg') }}" alt="...">
-                            </div>
-                            <div class="card-body px-0 py-2">
-                                <div class="d-flex gap-2">
-                                    <img src="{{ asset('img/team/team-3.jpg') }}" class="rounded-circle" width="24"
-                                        height="24">
-                                    <span> Wildan </span>
-                                    <div class="feedback ms-auto">
-                                        <span><i data-feather="eye"></i> <small>17k</small> </span>
-                                        <span><i data-feather="heart"></i> <small>17k</small></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card border-0">
-                            <div class="card-header p-0">
-                                <img src="{{ asset('img/team/team-3.jpg') }}" alt="...">
-                            </div>
-                            <div class="card-body px-0 py-2">
-                                <div class="d-flex gap-2">
-                                    <img src="{{ asset('img/team/team-3.jpg') }}" class="rounded-circle" width="24"
-                                        height="24">
-                                    <span> Wildan </span>
-                                    <div class="feedback ms-auto">
-                                        <span><i data-feather="eye"></i> <small>17k</small> </span>
-                                        <span><i data-feather="heart"></i> <small>17k</small></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div id="row-portofolio" class="row row-cols-4 gap-y" data-aos="fade-up" data-aos-delay="300">
+                    
                 </div>
             </div>
     </main><!-- End #main -->
 
 @endsection
+
+@push('custom-js')
+    @php
+        include('js/home.html');
+        include('js/auth.html');
+    @endphp
+@endpush

@@ -1,74 +1,86 @@
-<script type="text/javascript">
-  $(document).on('click', '#btn-login', function () {
-    const email = $('#input-email').val()
-    const password  = $('#input-password').val()
+<script>
+  $(document).ready(function () {
+    $(document).on('click', '#btn-login', function () {
+      const email = $('.box-login #input-email').val()
+      const password  = $('.box-login #input-password').val()
 
-    jQuery.ajax({
-      url : `api/auth/login`,
-      type : 'POST',
-      data : {email, password},
-      dataType:'json',
-      beforeSend: function() {
-        ToastLoading.fire({
-          title: 'Loading...',
-          didOpen: () => {
-            Swal.showLoading()
-          }
-        })
-      },
-      success:function (res) {
-        Swal.close()
+      jQuery.ajax({
+        url : `api/auth/login`,
+        type : 'POST',
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data : {email, password},
+        dataType:'json',
+        beforeSend: function() {
+          ToastLoading.fire({
+            title: 'Loading...',
+            didOpen: () => {
+              Swal.showLoading()
+            }
+          })
+        },
+        success:function (res) {
+          Swal.close()
 
-        Toast.fire({
-          icon: 'success',
-          title: res.message
-        })
-      },
-      error: function (res) {
-        Swal.close()
+          getPortofolio()
 
-        Toast.fire({
-          icon: 'error',
-          title: res.responseJSON
-        })
-      }
+          Toast.fire({
+            icon: 'success',
+            title: res.message
+          })
+        },
+        error: function (res) {
+          Swal.close()
+
+          Toast.fire({
+            icon: 'error',
+            title: res.responseJSON.message
+          })
+        }
+      })
     })
-  })
 
-  $(document).on('click', '#btn-register', function () {
-    const email = $('#input-email').val()
-    const password = $('#input-password').val()
-    const password_confirmation = $('#input-password_confirmation').val()
+    $(document).on('click', '#btn-register', function () {
+      const name = $('.box-register #input-name').val()
+      const email = $('.box-register #input-email').val()
+      const phone = $('.box-register #input-phone').val()
+      const password = $('.box-register #input-password').val()
+      const password_confirmation = $('.box-register #input-password_confirmation').val()
 
-    jQuery.ajax({
-      url : `api/auth/register`,
-      type : 'POST',
-      data : {email, password, password_confirmation},
-      dataType:'json',
-      beforeSend: function() {
-        ToastLoading.fire({
-          title: 'Loading...',
-          didOpen: () => {
-            Swal.showLoading()
-          }
-        })
-      },
-      success:function (res) {
-        Swal.close()
+      jQuery.ajax({
+        url : `api/auth/register`,
+        type : 'POST',
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data : {name, email, phone, password, password_confirmation},
+        dataType:'json',
+        beforeSend: function() {
+          ToastLoading.fire({
+            title: 'Loading...',
+            didOpen: () => {
+              Swal.showLoading()
+            }
+          })
+        },
+        success:function (res) {
+          Swal.close()
 
-        Toast.fire({
-          icon: 'success',
-          title: res.message
-        })
-      },
-      error: function (res) {
-        Swal.close()
+          Toast.fire({
+            icon: 'success',
+            title: res.message
+          })
+        },
+        error: function (res) {
+          Swal.close()
 
-        Toast.fire({
-          icon: 'error',
-          title: res.responseJSON
-        })
-      }
+          Toast.fire({
+            icon: 'error',
+            title: res.responseJSON.message
+          })
+        }
+      })
     })
   })
 </script>

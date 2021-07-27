@@ -15,6 +15,7 @@ use Sinergi\BrowserDetector\{
 };
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\{
   Auth,
   Validator,
@@ -23,14 +24,6 @@ use Illuminate\Support\Facades\{
 
 class AuthController extends Controller
 {
-  public function showFormLogin()
-  {
-    if (Auth::check()) {
-      return redirect()->route('home');
-    }
-    return view('auth.login');
-  }
-
   public function login(Request $request)
   {
     $rules = [
@@ -47,7 +40,7 @@ class AuthController extends Controller
     $validator = Validator::make($request->all(), $rules, $messages);
 
     if($validator->fails()){
-      return redirect()->back()->withErrors($validator)->withInput($request->all);
+      return response()->json(['message' => $validator->errors()->first()], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     $data = [
@@ -57,7 +50,7 @@ class AuthController extends Controller
 
     Auth::attempt($data);
 
-    if (Auth::check()) {
+    if (Auth::guard('web')->check()) {
       if(!empty($_SERVER['HTTP_CLIENT_IP'])) {  
         $ip = $_SERVER['HTTP_CLIENT_IP'];  
       } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {  
@@ -81,17 +74,19 @@ class AuthController extends Controller
         'login_at'        => \Carbon\Carbon::now()
       ]);
 
-      return redirect()->route('home');
+      if (! $request->expectsJson()) {
+        return redirect()->route('dashboard.index');
+      } else {
+        return response()->json([
+          'message' => 'login success',
+          'role'    => Auth::user()->role
+        ], Response::HTTP_OK);
+      }
+
     } else {
-      Session::flash('error', 'Username atau password salah');
-      return redirect()->route('login');
+      return response()->json(['message' => 'email or password not valid'], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
-  }
-
-  public function showFormRegister()
-  {
-    return view('auth.register');
   }
 
   public function register(Request $request)
@@ -100,7 +95,6 @@ class AuthController extends Controller
       'name'                  => 'required|min:3|max:35',
       'email'                 => 'required|email|unique:users,email',
       'phone'                 => 'required|numeric|digits_between:12,14',
-      'job'                   => 'required|in:designer,manager,accaunting',
       'password'              => 'required|confirmed'
     ];
 
@@ -110,12 +104,10 @@ class AuthController extends Controller
       'name.max'              => 'Nama lengkap maksimal 35 karakter',
       'email.required'        => 'Alamat email wajib diisi',
       'email.email'           => 'Alamat email tidak sesuai',
-      'email.unique'          => 'Alamat email lengkap sudah terdaftar',
+      'email.unique'          => 'Alamat email sudah terdaftar',
       'phone.required'        => 'Nomor HP wajib diisi',
       'phone.numeric'         => 'Nomer HP wajib berupa angka',
       'phone.digits_between'  => 'Nomer HP wajib terdiri dari 12 sampai 14 digit',
-      'job.required'          => 'Pekerjaan wajib diisi',
-      'job.in'                => 'Pekerjaan tidak sesuai',
       'password.required'     => 'Password wajib diisi',
       'password.confirmed'    => 'Password tidak sama dengan konfirmasi password'
     ];
@@ -123,7 +115,7 @@ class AuthController extends Controller
     $validator = Validator::make($request->all(), $rules, $messages);
 
     if($validator->fails()) {
-      return redirect()->back()->withErrors($validator)->withInput($request->all);
+      return response()->json(['message' => $validator->errors()->first()], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     $user = User::create([
@@ -135,17 +127,17 @@ class AuthController extends Controller
     ]);
 
     if($user){
-      Session::flash('success', 'Register berhasil! Silahkan login untuk mengakses data');
-      return redirect()->route('login');
+      return response()->json([
+        'message' => 'register success'
+      ], Response::HTTP_OK);
     } else {
-      Session::flash('errors', ['' => 'Register gagal! Silahkan ulangi beberapa saat lagi']);
-      return redirect()->route('register');
+      return response()->json('register failed please try again', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
   }
 
   public function logout()
   {
     Auth::logout();
-    return redirect()->route('login');
+    return redirect()->route('home');
   }
 }

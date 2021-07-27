@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('phone', 16);
             $table->string('photo_profile', 128)->nullable();
             $table->integer('total_generate')->default(0);
-            $table->enum('job', ['designer', 'manager', 'accaunting']);
+            $table->enum('job', ['designer', 'manager', 'accaunting'])->nullable();
             $table->enum('role', ['admin', 'user'])->default('user');
             $table->string('password');
             $table->timestamps();

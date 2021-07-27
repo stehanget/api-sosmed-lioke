@@ -76,4 +76,14 @@ class CommentController extends Controller
         ]);
       }
     }
+
+    public function getCommentByProject($id)
+    {
+      $comments = Comment::where('project_id', $id)->get();
+
+      return response()->json([
+        'message' => 'success display the specified resource',
+        'data' => $comments
+      ], Response::HTTP_OK);
+    }
 }
