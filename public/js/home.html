@@ -19,8 +19,8 @@
 
         portofolioData.forEach((portofolio) => {
             html += `<div class="col">
-                        <div class="card border-0" data-bs-toggle="modal" data-bs-target="#view">
-                            <div class="card-header p-0">
+                        <div class="card border-0">
+                            <div class="card-header p-0" data-bs-toggle="modal" data-bs-target="#view">
                                 <img src="${portofolio.images[0].source}" alt="...">
                             </div>
                             <div class="card-body px-0 py-2">
@@ -29,7 +29,7 @@
                                         height="24">
                                     <span>${portofolio.user.name}</span>
                                     <div class="feedback ms-auto">
-                                        <span>
+                                        <span  data-bs-toggle="modal" data-bs-target="#view">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                             <small>${portofolio.total_view}</small>
                                         </span>

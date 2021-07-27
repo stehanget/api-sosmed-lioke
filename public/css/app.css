@@ -1903,6 +1903,23 @@ section {
   height: 24px;
 }
 
+#view .feed {  
+  text-align: center;
+}
+
+#view .feed img {
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+#view .comment {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 400px;
+  margin-bottom: 12px;
+}
+
 .btn-add-project {
   
 }
