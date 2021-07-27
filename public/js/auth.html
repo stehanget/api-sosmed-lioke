@@ -2,17 +2,17 @@
   $(document).ready(function () {
     $(document).on('click', '#btn-login', function () {
       const email = $('.box-login #input-email').val()
-      const password  = $('.box-login #input-password').val()
+      const password = $('.box-login #input-password').val()
 
       jQuery.ajax({
-        url : `api/auth/login`,
-        type : 'POST',
+        url: `api/auth/login`,
+        type: 'POST',
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        data : {email, password},
-        dataType:'json',
-        beforeSend: function() {
+        data: { email, password },
+        dataType: 'json',
+        beforeSend: function () {
           ToastLoading.fire({
             title: 'Loading...',
             didOpen: () => {
@@ -20,7 +20,7 @@
             }
           })
         },
-        success:function (res) {
+        success: function (res) {
           Swal.close()
 
           getPortofolio()
@@ -49,14 +49,14 @@
       const password_confirmation = $('.box-register #input-password_confirmation').val()
 
       jQuery.ajax({
-        url : `api/auth/register`,
-        type : 'POST',
+        url: `api/auth/register`,
+        type: 'POST',
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        data : {name, email, phone, password, password_confirmation},
-        dataType:'json',
-        beforeSend: function() {
+        data: { name, email, phone, password, password_confirmation },
+        dataType: 'json',
+        beforeSend: function () {
           ToastLoading.fire({
             title: 'Loading...',
             didOpen: () => {
@@ -64,7 +64,7 @@
             }
           })
         },
-        success:function (res) {
+        success: function (res) {
           Swal.close()
 
           Toast.fire({

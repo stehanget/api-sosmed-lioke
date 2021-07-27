@@ -3,10 +3,10 @@
 
     const getPortofolio = () => {
         jQuery.ajax({
-            url : `api/projects`,
-            type : 'GET',
-            dataType:'json',
-            success:function (res) {
+            url: `api/projects`,
+            type: 'GET',
+            dataType: 'json',
+            success: function (res) {
                 portofolioData = res.data
 
                 setPortofolio()

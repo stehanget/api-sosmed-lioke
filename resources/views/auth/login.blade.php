@@ -28,11 +28,11 @@
                                 </div>
                                 <div class="col mx-3">
                                     <div class="mb-2">
-                                        <input type="email" class="form-control" id="email" placeholder="Your E-mail"
+                                        <input type="email" class="form-control" id="login-email" placeholder="Your E-mail"
                                             required>
                                     </div>
                                     <div>
-                                        <input type="password" class="form-control" id="password"
+                                        <input type="password" class="form-control" id="login-password"
                                             placeholder="Your Password" required>
                                     </div>
                                     <i class="small">Don't you have an account ? <a class="register-link" href="#">Register
@@ -49,18 +49,19 @@
                                 </div>
                                 <div class="col mx-3">
                                     <div class="mb-2">
-                                        <input type="name" class="form-control" id="name" placeholder="Your Name" required>
-                                    </div>
-                                    <div class="mb-2">
-                                        <input type="email" class="form-control" id="email" placeholder="Your E-mail"
+                                        <input type="name" class="form-control" id="register-name" placeholder="Your Name"
                                             required>
                                     </div>
                                     <div class="mb-2">
-                                        <input type="password" class="form-control" id="password"
+                                        <input type="email" class="form-control" id="register-email"
+                                            placeholder="Your E-mail" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <input type="password" class="form-control" id="register-password"
                                             placeholder="Your Password" required>
                                     </div>
                                     <div>
-                                        <input type="password" class="form-control" id="confirm-password"
+                                        <input type="password" class="form-control" id="register-confirm-password"
                                             placeholder="Confirm Your Password" required>
                                     </div>
                                     <i class="small">Do you have an account ? <a class="login-link" href="#">Login
