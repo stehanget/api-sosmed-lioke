@@ -12,10 +12,13 @@
                     <h2>Membuat kita sulit dalam apapun :)</h2>
                 </div>
             </div>
-            <div class="text-center">
-                <a href="#about" class="btn-get-started register-link" data-bs-toggle="modal" data-bs-target="#auth">Sign
-                    Up</a>
-            </div>
+            @if (!Auth::check())
+                <div class="text-center">
+                    <a href="#about" class="btn-get-started register-link" data-bs-toggle="modal"
+                        data-bs-target="#auth">Sign
+                        Up</a>
+                </div>
+            @endif
         </div>
     </section><!-- End Hero -->
 
@@ -48,6 +51,7 @@
     </main><!-- End #main -->
 
     @include('partials.modal._view')
+    @include('partials.modal._add-image')
 
 @endsection
 
