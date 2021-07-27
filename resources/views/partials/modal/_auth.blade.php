@@ -4,7 +4,7 @@
             <div class="modal-body p-0">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-12 col-md-7 p-3 text-white">
+                        <div class="col-12 col-md-7 d-none d-md-block p-3 text-white">
                             <div class="row">
                                 <div class="col align-center">
                                     <h3 class="card-title text-left">Logo</h3>

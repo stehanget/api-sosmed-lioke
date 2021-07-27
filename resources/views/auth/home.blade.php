@@ -22,7 +22,7 @@
     <main id="main">
         <!-- ======= Portfolio Section ======= -->
         <section id="portfolio" class="portfolio">
-            <div class="container" data-aos="fade-up">
+            <div class="container-fluid" data-aos="fade-up">
                 <div class="row" data-aos="fade-up" data-aos-delay="150">
                     <div class="col-lg-12 d-flex justify-content-between">
                         <h2>Portfolio</h2>
@@ -35,11 +35,13 @@
                     </div>
                 </div>
 
-                <div id="row-portofolio" class="row row-cols-4 gap-y" data-aos="fade-up" data-aos-delay="300">
+                <div id="row-portofolio" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 gap-y" data-aos="fade-up" data-aos-delay="300">
                     
                 </div>
             </div>
     </main><!-- End #main -->
+
+    @include('partials.modal._view')
 
 @endsection
 

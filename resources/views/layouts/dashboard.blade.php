@@ -35,7 +35,7 @@
 
     @include('partials._header')
 
-    <div class="container">
+    <div class="container-fluid">
         @include('partials.modal._auth')
 
         @yield('content')

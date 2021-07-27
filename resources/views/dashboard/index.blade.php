@@ -39,7 +39,7 @@
                     </div>
                 </div>
 
-                <div id="row-portofolio" class="row row-cols-4 gap-y" data-aos="fade-up" data-aos-delay="300">
+                <div id="row-portofolio" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 gap-y" data-aos="fade-up" data-aos-delay="300">
                     
                 </div>
             </div>

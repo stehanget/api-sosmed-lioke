@@ -4,6 +4,10 @@
             <div class="modal-body">
                 <!-- partial:index.partial.html -->
                 <form class="form">
+                    <label for="project-name" class="form-label">Nama Proyek</label>
+                    <input type="text" id="project-name" class="form-control mb-3" placeholder="Tulis nama proyek anda disini">
+                    <label for="project-desc" class="form-label">Deskripsi Proyek</label>
+                    <textarea name="" id="project-desc" class="form-control mb-3" rows="5" placeholder="Tulis deskripsi proyek anda disini"></textarea>
                     <label class="form__container" id="upload-container">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
