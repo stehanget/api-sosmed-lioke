@@ -23,6 +23,7 @@ use App\Http\Controllers\{
 
 // Home visitor are not logged in
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('categories', [CategoryController::class, 'index'])->name('category.index');
 
 //Home visitor are logged in
 Route::get('dashboard', function () {
@@ -33,10 +34,10 @@ Route::prefix('api')->group(function () {
   Route::post('auth/login', [AuthController::class, 'login'])->name('login');
   Route::post('auth/register', [AuthController::class, 'register'])->name('register');
   Route::get('auth/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
-  
+
   Route::get('projects/', [ProjectController::class, 'index'])->name('project.index');
   Route::get('projects/{project:id}', [ProjectController::class, 'show'])->name('project.show');
-  
+
   Route::group([
     'middleware'  => 'auth',
     'prefix'      => 'projects'
@@ -46,20 +47,19 @@ Route::prefix('api')->group(function () {
     Route::delete('/{project:id}', [ProjectController::class, 'destroy'])->name('project.destroy');
     Route::get('/by/user', [ProjectController::class, 'getProjectByUser'])->name('project.by/user');
   });
-  
+
   Route::group([
     'middleware'  => 'auth',
     'prefix'      => 'categories'
   ], function () {
-    Route::get('/', [CategoryController::class, 'index'])->name('category.index');
     Route::get('/{category:id}', [CategoryController::class, 'show'])->name('category.show');
     Route::post('/', [CategoryController::class, 'store'])->name('category.store');
     Route::Put('/{category:id}', [CategoryController::class, 'update'])->name('category.update');
     Route::delete('/{category:id}', [CategoryController::class, 'destroy'])->name('category.destroy');
   });
-  
+
   Route::get('comments/by/booth/{id}', [CommentController::class, 'getCommentByProject'])->name('comment.by.project');
-  
+
   Route::group([
     'middleware'  => 'auth',
     'prefix'      => 'comments'
@@ -68,7 +68,7 @@ Route::prefix('api')->group(function () {
     Route::Put('/{comment:id}', [CommentController::class, 'update'])->name('comment.update');
     Route::delete('/{comment:id}', [CommentController::class, 'destroy'])->name('comment.destroy');
   });
-  
+
   Route::group([
     'middleware'  => 'auth',
     'prefix'      => 'images'

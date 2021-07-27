@@ -18,9 +18,9 @@
         let html = ''
 
         portofolioData.forEach((portofolio) => {
-            html += `<div class="col">
+            html += `<div class="col filter filter-${portofolio.category_id}">
                         <div class="card border-0">
-                            <div class="card-header p-0" data-bs-toggle="modal" data-bs-target="#view">
+                            <div class="card-header p-0" data-bs-toggle="modal" data-bs-target="#view" data-portofolio="${portofolio.category_id}">
                                 <img src="${portofolio.images[0].source}" alt="...">
                             </div>
                             <div class="card-body px-0 py-2">
@@ -45,6 +45,72 @@
         })
 
         $('#row-portofolio').html(html)
+    }
+
+    $(document).on('click', '#portfolio .card-header', function () {
+        category_id = $(this).data('portofolio')
+        setViewPortofolio(category_id)
+    })
+
+    const setViewPortofolio = (id) => {
+        const portofolio = portofolioData.find(v => v.category_id == id)
+        htmlIndicator = ''
+        htmlImg = ''
+        htmlComment = ''
+
+        portofolio.images.forEach((image, i) => {
+            if (i == 0) {
+                htmlImg += `
+                    <div class="carousel-item active">
+                        <img src="${image.source}" alt="">
+                    </div>
+                `
+
+                htmlIndicator += `
+                    <button type="button" class="active" data-bs-target="#image-feed" data-bs-slide-to="${i}"></button>
+                `
+            } else {
+                htmlIndicator += `
+                    <button type="button" data-bs-target="#image-feed" data-bs-slide-to="${i}"></button>
+                `
+
+                htmlImg += `
+                        <div class="carousel-item">
+                            <img src="${image.source}" alt="">
+                        </div>
+                `
+            }
+
+        })
+
+        portofolio.comments.forEach(comment => {
+            htmlComment += `
+                <div class="row py-3">
+                    <div class="col-auto">
+                        <div class="avatar">
+                            <img class="rounded-circle w-100" src="/img/team/team-3.jpg"
+                                alt="">
+                        </div>
+                    </div>
+                    <div class="col ps-0">
+                        <span class="name-visitor nav-link d-inline me-1 p-0">Name</span>
+                        <span>${comment.content}</span>
+                    </div>
+                </div>
+            `
+        })
+
+        console.log(htmlIndicator)
+        console.log(htmlImg)
+        console.log(htmlComment)
+
+        $('#image-feed .carousel-indicators').html(htmlIndicator)
+        $('#image-feed .carousel-inner').html(htmlImg)
+        $('#content-feed .comment .comment-body').html(htmlComment)
+        $('#content-feed .user').html(portofolio.user.name)
+        $('#content-feed .category').html(portofolio.category.title)
+
+        console.log(portofolio)
     }
 
     $(document).ready(function () {

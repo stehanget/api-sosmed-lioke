@@ -7,15 +7,15 @@
 
                         <div id="image-feed" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
                             <div class="carousel-indicators">
-                                <button type="button" data-bs-target="#image-feed" data-bs-slide-to="0" class="active"
+                                {{-- <button type="button" data-bs-target="#image-feed" data-bs-slide-to="0" class="active"
                                     aria-current="true" aria-label="Slide 1"></button>
                                 <button type="button" data-bs-target="#image-feed" data-bs-slide-to="1"
                                     aria-label="Slide 2"></button>
                                 <button type="button" data-bs-target="#image-feed" data-bs-slide-to="2"
-                                    aria-label="Slide 3"></button>
+                                    aria-label="Slide 3"></button> --}}
                             </div>
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
+                                {{-- <div class="carousel-item active">
                                     <img src="https://dummyimage.com/400x400/1f1a1f/ebebeb.png&text=1" alt="">
                                 </div>
                                 <div class="carousel-item">
@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="carousel-item">
                                     <img src="https://dummyimage.com/400x400/1f1a1f/ebebeb.png&text=1" alt="">
-                                </div>
+                                </div> --}}
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#image-feed"
                                 data-bs-slide="prev">
@@ -37,7 +37,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="col-5 border-start d-flex flex-column">
+                    <div id="content-feed" class="col-5 border-start d-flex flex-column">
                         <div class="d-flex mb-3">
                             <span class="avatar me-2">
                                 <img class="rounded-circle w-100" src="{{ asset('img/team/team-3.jpg') }}" alt="">
@@ -45,19 +45,24 @@
                             <span class="user">user pembuat</span>
                         </div>
                         <div class="comment">
-                            <p>caption</p>
-                            <div class="row py-3">
-                                <div class="col-auto">
-                                    <div class="avatar">
-                                        <img class="rounded-circle w-100" src="{{ asset('img/team/team-3.jpg') }}"
-                                            alt="">
+                            Category : <span class="category">anim</span>
+                            <div class="description">
+                                <p>description</p>
+                            </div>
+                            <div class="comment-body">
+                                {{-- <div class="row py-3">
+                                    <div class="col-auto">
+                                        <div class="avatar">
+                                            <img class="rounded-circle w-100" src="{{ asset('img/team/team-3.jpg') }}"
+                                                alt="">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <span class="name-visitor nav-link d-inline me-1 p-0">Name</span>
-                                    <span class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores,
-                                        pariatur.</span>
-                                </div>
+                                    <div class="col">
+                                        <span class="name-visitor nav-link d-inline me-1 p-0">Name</span>
+                                        <span class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores,
+                                            pariatur.</span>
+                                    </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="input-comment mt-auto">

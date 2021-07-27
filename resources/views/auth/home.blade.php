@@ -28,15 +28,21 @@
                         <h2>Portfolio</h2>
                         <ul id="portfolio-flters">
                             <li data-filter="*" class="filter-active">All</li>
-                            <li data-filter=".filter-app">App</li>
-                            <li data-filter=".filter-card">Card</li>
-                            <li data-filter=".filter-web">Web</li>
+                            <li data-filter="1">Animation</li>
+                            <li data-filter="2">Branding</li>
+                            <li data-filter="3">Illustration</li>
+                            <li data-filter="4">mobile</li>
+                            <li data-filter="5">Print</li>
+                            <li data-filter="6">Product Design</li>
+                            <li data-filter="7">Typography</li>
+                            <li data-filter="8">Web Design</li>
                         </ul>
                     </div>
                 </div>
 
-                <div id="row-portofolio" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 gap-y" data-aos="fade-up" data-aos-delay="300">
-                    
+                <div id="row-portofolio" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 gap-y" data-aos="fade-up"
+                    data-aos-delay="300">
+
                 </div>
             </div>
     </main><!-- End #main -->
@@ -47,7 +53,7 @@
 
 @push('custom-js')
     @php
-        include('js/home.html');
-        include('js/auth.html');
+    include 'js/home.html';
+    include 'js/auth.html';
     @endphp
 @endpush
