@@ -16,7 +16,7 @@ class ProjectController extends Controller
     public function index()
     {
       if (Auth::check()) {
-        $projects = Project::select('id', 'user_id', 'category_id', 'total_like', 'total_view')
+        $projects = Project::select('id', 'user_id', 'category_id', 'description', 'total_like', 'total_view')
                     ->with(['comments','category:id,title', 'user:id,name'])
                     ->with(array('images' => function ($query) {
                       $query->select('id', 'project_id', 'source');
@@ -24,7 +24,7 @@ class ProjectController extends Controller
                     ->where('visibility', true)
                     ->get();
       } else {
-        $projects = Project::select('id', 'user_id', 'category_id', 'total_like', 'total_view')
+        $projects = Project::select('id', 'user_id', 'category_id', 'description', 'total_like', 'total_view')
                     ->with(['comments','category:id,title', 'user:id,name'])
                     ->with(array('images' => function ($query) {
                       $query->select('id', 'project_id', 'source');

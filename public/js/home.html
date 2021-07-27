@@ -20,7 +20,7 @@
         portofolioData.forEach((portofolio) => {
             html += `<div class="col filter filter-${portofolio.category_id}">
                         <div class="card border-0">
-                            <div class="card-header p-0" data-bs-toggle="modal" data-bs-target="#view" data-portofolio="${portofolio.category_id}">
+                            <div class="card-header p-0" data-bs-toggle="modal" data-bs-target="#view" data-portofolio-id="${portofolio.id}">
                                 <img src="${portofolio.images[0].source}" alt="...">
                             </div>
                             <div class="card-body px-0 py-2">
@@ -48,12 +48,13 @@
     }
 
     $(document).on('click', '#portfolio .card-header', function () {
-        category_id = $(this).data('portofolio')
-        setViewPortofolio(category_id)
+        const id = $(this).data('portofolio-id')
+        setViewPortofolio(id)
     })
 
     const setViewPortofolio = (id) => {
-        const portofolio = portofolioData.find(v => v.category_id == id)
+        const portofolio = portofolioData.find(v => v.id == id)
+
         htmlIndicator = ''
         htmlImg = ''
         htmlComment = ''
@@ -100,18 +101,63 @@
             `
         })
 
-        console.log(htmlIndicator)
-        console.log(htmlImg)
-        console.log(htmlComment)
-
         $('#image-feed .carousel-indicators').html(htmlIndicator)
         $('#image-feed .carousel-inner').html(htmlImg)
         $('#content-feed .comment .comment-body').html(htmlComment)
         $('#content-feed .user').html(portofolio.user.name)
         $('#content-feed .category').html(portofolio.category.title)
-
-        console.log(portofolio)
+        $('#content-feed .description').html(`<p>${portofolio.description}</p>`)
+        $('#content-feed #btn-store-comment').attr('data-portofolio-id', portofolio.id)
     }
+
+    $(document).on('click', '#btn-store-comment', function () {
+        const project_id = $(this).data('portofolio-id')
+        const content = $('#input-comment').val()
+        const portofolio = portofolioData.find(v => v.id == project_id)
+        let commentData = portofolio.comments
+        const btn = $(this)
+
+        btn.addClass('disabled')
+
+        $('#content-feed .comment .comment-body').append(`
+            <div class="row py-3">
+                <div class="col-auto">
+                    <div class="avatar">
+                        <img class="rounded-circle w-100" src="/img/team/team-3.jpg"
+                            alt="">
+                    </div>
+                </div>
+                <div class="col ps-0">
+                    <span class="name-visitor nav-link d-inline me-1 p-0">Name</span>
+                    <span>${content}</span>
+                </div>
+            </div>
+        `)
+
+        jQuery.ajax({
+            url: `api/comments`,
+            type: 'POST',
+            data: {project_id, content},
+            dataType: 'json',
+            success: function (res) {
+
+                btn.removeClass('disabled')
+
+                commentData.push(res.data)
+
+                portofolioData = portofolioData.map(v => {
+                    if (JSON.stringify(v) === JSON.stringify(portofolio)) {
+                        return {
+                            ...v,
+                            comments: commentData
+                        }
+                    } else {
+                        return v
+                    }
+                })
+            }
+        })
+    })
 
     $(document).ready(function () {
         getPortofolio()

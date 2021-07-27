@@ -68,8 +68,8 @@
                         <div class="input-comment mt-auto">
                             <div class="row mb-2">
                                 <div class="col d-flex">
-                                    <textarea class="form-control" name="" rows="1"></textarea>
-                                    <button class="btn btn-get-started m-0 py-2">Kirim</button>
+                                    <textarea id="input-comment" class="form-control" name="" rows="1"></textarea>
+                                    <button id="btn-store-comment" class="btn btn-get-started m-0 py-2">Kirim</button>
                                 </div>
                             </div>
                         </div>
