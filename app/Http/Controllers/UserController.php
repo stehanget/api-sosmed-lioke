@@ -34,12 +34,12 @@ class UserController extends Controller
     public function update(Request $request)
     {
       $validator = Validator::make($request->all(), [
-        'name'      => 'required|max:128',
-        'nickname'  => 'required|max:64',
-        'email'     => 'required|email|unique:users,email,' . Auth::id(),
-        'phone'     => 'required|numeric|digits_between:12,14',
-        'job'       => 'required|in:designer,manager,accaunting',
-        'password'  => 'confirmed'
+        'name'          => 'required|max:128',
+        'nickname'      => 'required|max:64|unique:users,nickname,' . Auth::id(),
+        'email'         => 'required|email|unique:users,email,' . Auth::id(),
+        'phone'         => 'required|numeric|digits_between:12,14',
+        'password'      => 'confirmed',
+        'photo_profile' => 'mimes:jpg,jpeg,png',
       ]);
 
       if ($validator->fails()) {
@@ -47,7 +47,7 @@ class UserController extends Controller
       }
 
       try {
-        $user = User::where('id', Auth::id())->first();
+        $user = User::find(Auth::id());
 
         if ($request->password) {
           if (Hash::check($request->password, Auth::user()->password)) {
@@ -57,9 +57,32 @@ class UserController extends Controller
           }
         }
 
-        $user->name   = $request->name;
-        $user->email  = $request->email;
-        $user->phone  = $request->phone;
+        $user->name     = $request->name;
+        $user->nickname = $request->nickname;
+        $user->email    = $request->email;
+        $user->phone    = $request->phone;
+
+        if ($request->interest) {
+          $user->interest = $request->interest;
+        }
+
+        if ($request->bio) {
+          $user->bio      = $request->bio;
+        }
+
+        if ($request->hasFile('photo_profile')) {
+          if ($photo = $user->photo_profile) {
+              $base = explode('/', $photo);
+
+              $path = end($base);
+              Storage::delete('images/profile' . $path);
+          }
+
+          $file = $request->file('photo_profile');
+          $path = $file->store('images/profile');
+
+          $user->photo_profile = env('APP_URL') . '/' . $path;
+        }
 
         $user->save();
 
@@ -72,43 +95,5 @@ class UserController extends Controller
           'message' => 'failed ' . $e->errorInfo
         ]);
       }
-    }
-
-    public function updatePhotoProfile(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'photo_profile'      => 'required|mimes:jpg,jpeg,png',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()->first()], Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        try {
-            $user = User::where('id', Auth::id())->first();
-
-            if ($photo = $user->photo_profile) {
-                $base = explode('/', $photo);
-
-                $path = end($base);
-                Storage::delete('images/profile' . $path);
-            }
-
-            $file = $request->file('photo_profile');
-            $path = $file->store('images/profile');
-
-            $user->photo_profile = env('APP_URL') . '/' . $path;
-            
-            $user->save();
-
-            return response()->json([
-                'message' => 'success update the specified resource in storage',
-                'data' => $user
-            ], Response::HTTP_OK);
-        } catch (QueryException $e) {
-            return response()->json([
-                'message' => 'failed ' . $e->errorInfo
-            ]);
-        }
     }
 }

@@ -74,12 +74,23 @@ class AuthController extends Controller
         'login_at'        => \Carbon\Carbon::now()
       ]);
 
+      $likes = Session::get('like');
+      $userLikes = [];
+
+      if ($likes) {
+        foreach ($likes as $like) {
+            if ($like['user_id'] == Auth::id()) {
+                array_push($userLikes, $like['project_id']);
+            }
+        }
+      }
+
       if (! $request->expectsJson()) {
         return redirect()->route('dashboard.index');
       } else {
         return response()->json([
-          'message' => 'login success',
-          'role'    => Auth::user()->role
+          'message'   => 'login success',
+          'data'      => ['user' => Auth::user(), 'user_likes' => $userLikes]
         ], Response::HTTP_OK);
       }
 
@@ -92,7 +103,8 @@ class AuthController extends Controller
   public function register(Request $request)
   {
     $rules = [
-      'name'                  => 'required|min:3|max:35',
+      'name'                  => 'required|min:3|max:128',
+      'nickname'              => 'required|max:64|unique:users,nickname',
       'email'                 => 'required|email|unique:users,email',
       'phone'                 => 'required|numeric|digits_between:12,14',
       'password'              => 'required|confirmed'
@@ -101,7 +113,10 @@ class AuthController extends Controller
     $messages = [
       'name.required'         => 'Nama lengkap wajib diisi',
       'name.min'              => 'Nama lengkap minimal 3 karakter',
-      'name.max'              => 'Nama lengkap maksimal 35 karakter',
+      'name.max'              => 'Nama lengkap maksimal 128 karakter',
+      'nickname.required'     => 'Nickname wajib diisi',
+      'nickname.unique'       => 'Nickname sudah terdaftar',
+      'nickname.max'          => 'Nickname maksimal 64 karakter',
       'email.required'        => 'Alamat email wajib diisi',
       'email.email'           => 'Alamat email tidak sesuai',
       'email.unique'          => 'Alamat email sudah terdaftar',
@@ -121,9 +136,9 @@ class AuthController extends Controller
     $user = User::create([
       'name'        => $request->name,
       'email'       => $request->email,
+      'nickname'    => $request->nickname,
       'phone'       => $request->phone,
       'password'    => bcrypt($request->password),
-      'job'         => $request->job
     ]);
 
     if($user){

@@ -42,9 +42,11 @@
                                 <h5 class="mb-4">Sign Up</h5>
                             </div>
                             <div class="col">
-                                <div class="mb-2">
-                                    <input type="name" class="form-control" id="input-name" placeholder="Name"
+                                <div class="mb-2 d-flex gap-2">
+                                    <input type="text" class="form-control" id="input-name" placeholder="Name"
                                         required>
+                                    <input type="text" class="form-control" id="input-nickname" placeholder="Nickname"
+                                    required>
                                 </div>
                                 <div class="mb-2">
                                     <input type="email" class="form-control" id="input-email"

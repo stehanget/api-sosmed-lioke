@@ -1,5 +1,6 @@
 .bg-turquoise {
     background-color: #016d77;
+    color: white;
 }
 
 /**
@@ -18,10 +19,17 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* body {
-  color: #444444;
-  font-family: 'Poppins', sans-serif;
-} */
+body {
+  overflow: auto !important;
+}
+
+.box-login, .box-register {
+  color: black;
+}
+
+.feedback {
+  color: grey;
+}
 
 a {
   color: #006D77;
@@ -315,7 +323,7 @@ a:hover {
     display: block;
   }
   .navbar ul {
-    display: none;
+    display: flex;
   }
 }
 
@@ -1074,6 +1082,9 @@ section {
   text-align: center;
   border-radius: 50px;
   padding: 2px 15px;
+  flex-wrap: nowrap;
+  overflow: auto;
+  display: flex;
 }
 
 .portfolio #portfolio-flters li {
@@ -1908,7 +1919,7 @@ section {
 }
 
 #view .feed img {
-  height: 100%;
+  height: 500px;
   width: 100%;
   object-fit: cover;
   object-position: top;
@@ -1921,6 +1932,88 @@ section {
   margin-bottom: 12px;
 }
 
-.btn-add-project {
-  
+#row-portofolio .like {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(0deg, rgb(0 0 0 / 82%) 0%, rgb(0 0 0 / 22%) 100%);
+  bottom: 0;
+  box-shadow: 0px -4px 20px 1px #1e1a1f73;
+  transition: all .8s;
+}
+
+.total-like .feather-heart {
+  color: red;
+  fill: red;
+}
+
+.feedback .feather-eye {
+  color: blue;
+}
+
+.title-project {
+  position: absolute;
+    left: 8px;
+    top: 16px;
+}
+
+#row-portofolio .like .feather {
+  width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 10px;
+    color: white;
+    stroke-width: 1.5;
+}
+
+#row-portofolio .card-header:hover .like {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  #portfolio-flters {
+    display: none;
+  }
+  #row-portofolio .like {
+    opacity: 1;
+  }
+  .dropdown.porto {
+    display: block !important;
+  }
+}
+
+@media (max-width: 425px) {
+  #hero .img-profile {
+    width: 100px !important;
+    height: 100px;
+  }
+}
+
+@media (max-width: 400px) {
+  nav .dash {
+    display: none;
+  }
+}
+
+
+::-webkit-scrollbar{
+	width: 10px;
+  height: 10px;
+  border-radius: 25%;
+}
+
+::-webkit-scrollbar-track-piece{
+	background-color: #FFF;
+}
+
+::-webkit-scrollbar-thumb{
+	background-color: #CBCBCB;
+	outline: 2px solid #FFF;
+	outline-offset: -2px;
+	border: .1px solid #B7B7B7;
+}
+
+::-webkit-scrollbar-thumb:hover{
+	background-color: #909090;
 }

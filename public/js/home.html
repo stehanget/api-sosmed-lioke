@@ -9,23 +9,32 @@
             success: function (res) {
                 portofolioData = res.data
 
-                setPortofolio()
+                setPortofolio('*')
             }
         })
     }
 
-    const setPortofolio = () => {
+    const setPortofolio = (category) => {
         let html = ''
 
-        portofolioData.forEach((portofolio) => {
+        if (category == '*') {
+            portofolios = portofolioData
+        } else {
+            portofolios = portofolioData.filter(portofolio => portofolio.category.id == category)
+        }
+
+        console.log(userData)
+
+        portofolios.forEach((portofolio) => {
             html += `<div class="col filter filter-${portofolio.category_id}">
                         <div class="card border-0">
-                            <div class="card-header p-0" data-bs-toggle="modal" data-bs-target="#view" data-portofolio-id="${portofolio.id}">
-                                <img src="${portofolio.images[0].source}" alt="...">
+                            <div class="position-relative card-header p-0">
+                                <img src="${portofolio.images[0].source}" alt="..." data-bs-toggle="modal" data-bs-target="#view" data-portofolio-id="${portofolio.id}">
+                                ${userData != null ? portofolio.user.id == userData.id ? '' : `<div class="like btn-update-like" data-project-id="${portofolio.id}"><div class="title-project text-white">${portofolio.title}</div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>` : ''}
                             </div>
                             <div class="card-body px-0 py-2">
                                 <div class="d-flex gap-2">
-                                    <img src="img/team/team-3.jpg" class="rounded-circle" width="24"
+                                    <img src="${portofolio.user.photo_profile ? portofolio.user.photo_profile : 'img/team/team-3.jpg'}" class="rounded-circle" width="24"
                                         height="24">
                                     <span>${portofolio.user.name}</span>
                                     <div class="feedback ms-auto">
@@ -33,7 +42,7 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                             <small>${portofolio.total_view}</small>
                                         </span>
-                                        <span>
+                                        <span class="total-like" data-project-id="${portofolio.id}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                                             <small>${portofolio.total_like}</small>
                                         </span>
@@ -45,9 +54,15 @@
         })
 
         $('#row-portofolio').html(html)
+
+        portofolios.forEach(portofolio => {
+            if (userLikeData.includes(portofolio.id)) {
+                $(`.btn-update-like[data-project-id="${portofolio.id}"] svg`).css('fill', 'red').css('stroke', 'none')
+            }
+        })
     }
 
-    $(document).on('click', '#portfolio .card-header', function () {
+    $(document).on('click', '#portfolio .card-header img', function () {
         const id = $(this).data('portofolio-id')
         setViewPortofolio(id)
     })
@@ -89,12 +104,12 @@
                 <div class="row py-3">
                     <div class="col-auto">
                         <div class="avatar">
-                            <img class="rounded-circle w-100" src="/img/team/team-3.jpg"
+                            <img class="rounded-circle w-100" src="${comment.user.photo_profile !== null ? comment.user.photo_profile : '/img/team/team-3.jpg'}"
                                 alt="">
                         </div>
                     </div>
                     <div class="col ps-0">
-                        <span class="name-visitor nav-link d-inline me-1 p-0">Name</span>
+                        <span class="name-visitor nav-link d-inline me-1 p-0">${comment.user.nickname}</span>
                         <span>${comment.content}</span>
                     </div>
                 </div>
@@ -108,6 +123,11 @@
         $('#content-feed .category').html(portofolio.category.title)
         $('#content-feed .description').html(`<p>${portofolio.description}</p>`)
         $('#content-feed #btn-store-comment').attr('data-portofolio-id', portofolio.id)
+
+        if (!isLogin) {
+            $('#btn-store-comment').addClass('disabled')
+            $('#input-comment').prop('disabled', true)
+        }
     }
 
     $(document).on('click', '#btn-store-comment', function () {
@@ -123,12 +143,12 @@
             <div class="row py-3">
                 <div class="col-auto">
                     <div class="avatar">
-                        <img class="rounded-circle w-100" src="/img/team/team-3.jpg"
+                        <img class="rounded-circle w-100" src="${userData.photo_profile !== null ? userData.photo_profile : '/img/team/team-3.jpg'}"
                             alt="">
                     </div>
                 </div>
                 <div class="col ps-0">
-                    <span class="name-visitor nav-link d-inline me-1 p-0">Name</span>
+                    <span class="name-visitor nav-link d-inline me-1 p-0">${userData.nickname}</span>
                     <span>${content}</span>
                 </div>
             </div>
@@ -145,6 +165,8 @@
 
                 commentData.push(res.data)
 
+                $('#input-comment').val('')
+
                 portofolioData = portofolioData.map(v => {
                     if (JSON.stringify(v) === JSON.stringify(portofolio)) {
                         return {
@@ -157,6 +179,36 @@
                 })
             }
         })
+    })
+
+    $(document).on('click', '.btn-update-like', function () {
+        const id = $(this).data('project-id')
+        const btn = $(this)
+        let total_like = $(`span.total-like[data-project-id="${id}"]`).find('small').html()
+
+        jQuery.ajax({
+            url: `api/projects/update/total-like/${id}`,
+            type: 'PUT',
+            dataType: 'json',
+            success:function (res) {
+
+                btn.find('svg').css('fill', 'red').css('stroke', 'none')
+                $(`span.total-like[data-project-id="${id}"]`).find('small').html(++total_like)
+
+            }
+        })
+    })
+
+    $(document).on('click', '.filter-portofolio', function () {
+        const category_id = $(this).data('filter')
+
+        $('.filter-portofolio').each(function () {
+            $(this).removeClass('filter-active')
+        })
+
+        $(this).addClass('filter-active')
+
+        setPortofolio(category_id)
     })
 
     $(document).ready(function () {

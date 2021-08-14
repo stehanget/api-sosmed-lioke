@@ -60,7 +60,23 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        
+        @php
+            $userLikes = [];
+
+            if (Auth::check()) {
+                $likes = Session::get('like');
+
+                foreach ($likes as $like) {
+                    if ($like['user_id'] == Auth::id()) {
+                        array_push($userLikes, $like['project_id']);
+                    }
+                }
+            }
+        @endphp
+
+        var isLogin = {!! json_encode(Auth::check()) !!}
+		var userData = {!! json_encode(Auth::user()) !!}
+		var userLikeData = {!! json_encode($userLikes) !!}
     </script>
 
 	<script>

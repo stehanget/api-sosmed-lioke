@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Image;
 use App\Models\Project;
 use Illuminate\Database\QueryException;
@@ -10,22 +11,23 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ProjectController extends Controller
 {
     public function index()
     {
       if (Auth::check()) {
-        $projects = Project::select('id', 'user_id', 'category_id', 'description', 'total_like', 'total_view')
-                    ->with(['comments','category:id,title', 'user:id,name'])
+        $projects = Project::select('id', 'title', 'user_id', 'category_id', 'description', 'total_like', 'total_view')
+                    ->with(['comments.user','category:id,title', 'user:id,name,photo_profile'])
                     ->with(array('images' => function ($query) {
                       $query->select('id', 'project_id', 'source');
                     }))
                     ->where('visibility', true)
                     ->get();
       } else {
-        $projects = Project::select('id', 'user_id', 'category_id', 'description', 'total_like', 'total_view')
-                    ->with(['comments','category:id,title', 'user:id,name'])
+        $projects = Project::select('id', 'title', 'user_id', 'category_id', 'description', 'total_like', 'total_view')
+                    ->with(['comments.user','category:id,title', 'user:id,name,photo_profile'])
                     ->with(array('images' => function ($query) {
                       $query->select('id', 'project_id', 'source');
                     }))
@@ -56,8 +58,10 @@ class ProjectController extends Controller
 
       if (($total_image = $request->total_image) > 1) {
         for ($i = 1; $i < $total_image; $i++) {
+          $image = [];
+          array_push($image, $request->file('image' . $i));
 
-          $validator_image = Validator::make($request->file('image' . $i), [
+          $validator_image = Validator::make($image, [
             'image' . $i    => 'mimes:jpg,jpeg,png'
           ]);
 
@@ -68,12 +72,14 @@ class ProjectController extends Controller
       }
 
       try {
-        $project = Project::create([
+        $dataProject = [
           'user_id'     => Auth::id(),
           'category_id' => $request->category_id,
           'title'       => $request->title,
-          'description' => $request->description
-        ]);
+          'description' => $request->description,
+        ];
+
+        $project = Project::create($dataProject);
 
         $image = $request->file('image');
         $image = env('APP_URL') . '/' . $image->store('images/projects');
@@ -105,14 +111,19 @@ class ProjectController extends Controller
           $image = Image::insert($data);
         }
 
-        $data = array_merge($project, [
+        $dataProject = array_merge($dataProject, [
+          'id'       => $project->id,
           'images'   => $project->images,
-          'comments' => $project->comments
+          'comments' => $project->comments,
+          'user'     => $project->user,
+          'visibility'  => 0,
+          'total_view'  => 0,
+          'total_like'  => 0
         ]);
 
         return response()->json([
           'message' => 'success store a newly created resource in storage',
-          'data' => $data
+          'data' => $dataProject
         ], Response::HTTP_CREATED);
       } catch (QueryException $e) {
         return response()->json([
@@ -147,9 +158,17 @@ class ProjectController extends Controller
       try {
         $project->update($request->all());
 
-        $data = array_merge($project, [
-          'images' => $project->images,
-          'comments' => $project->comments
+        $data = array_merge($request->all(), [
+          'id'          => $project->id,
+          'user_id'     => $project->user_id,
+          'category_id' => $project->category_id,
+          'category'    => $project->category,
+          'user'        => $project->user,
+          'images'      => $project->images,
+          'comments'    => $project->comments,
+          'total_like'  => $project->total_like,
+          'total_view'  => $project->total_view,
+          'visibility'  => $project->visibility
         ]);
 
         return response()->json([
@@ -167,6 +186,7 @@ class ProjectController extends Controller
     {
       try {
         $images = Image::where('project_id', $project->id)->get();
+        $comments = Comment::where('project_id', $project->id)->get();
 
         foreach ($images as $image) {
           $base = explode('/', $image->source);
@@ -175,6 +195,10 @@ class ProjectController extends Controller
           Storage::delete('images/projects' . $path);
 
           $image->delete();
+        }
+
+        foreach ($comments as $comment) {
+          $comment->delete();
         }
 
         $project->delete();
@@ -189,10 +213,51 @@ class ProjectController extends Controller
       }
     }
 
+    public function updateVisibility(Project $project)
+    {
+      $project->visibility = !$project->visibility;
+      $project->save();
+
+      return response()->json([
+        'message' => 'success update visibility project'
+      ], Response::HTTP_OK);
+    }
+
+    public function updateLike(Project $project)
+    {
+      if ($project->user_id != Auth::id()) {
+        if (!Session::get('like')) {
+          Session::push('like', ['project_id' => $project->id, 'user_id' => Auth::id()]);
+          $project->increment('total_like');
+          $project->save();
+          
+          return Session::get('like');
+        }
+
+        $likes = Session::get('like');
+        $userLikes = [];
+
+        foreach ($likes as $like) {
+          if ($like['user_id'] == Auth::id()) {
+            array_push($userLikes, $like['project_id']);
+          }
+        }
+
+        if (!(in_array($project->id, $userLikes))) {
+          Session::push('like', ['project_id' => $project->id, 'user_id' => Auth::id()]);
+          $project->increment('total_like');
+          $project->save();
+          
+          return Session::get('like');
+        }
+        
+      }
+    }
+
     public function getProjectByUser()
     {
-      $projects = Project::select('id', 'user_id', 'category_id', 'total_like', 'total_view')
-                  ->with(['comments','category:id,title', 'user:id,name'])
+      $projects = Project::select('id', 'title', 'user_id', 'category_id', 'total_like', 'total_view', 'visibility', 'description', 'title')
+                  ->with(['comments.user','category:id,title', 'user:id,name,photo_profile'])
                   ->with(array('images' => function ($query) {
                     $query->select('id', 'project_id', 'source');
                   }))

@@ -7,7 +7,8 @@ use App\Http\Controllers\{
   CommentController,
   ImageController,
   ProjectController,
-  HomeController
+  HomeController,
+    UserController
 };
 
 /*
@@ -44,6 +45,8 @@ Route::prefix('api')->group(function () {
   ], function () {
     Route::post('/', [ProjectController::class, 'store'])->name('project.store');
     Route::Put('/{project:id}', [ProjectController::class, 'update'])->name('project.update');
+    Route::Put('/update/visibility/{project:id}', [ProjectController::class, 'updateVisibility'])->name('project.update.visibility');
+    Route::Put('/update/total-like/{project:id}', [ProjectController::class, 'updateLike'])->name('project.update.like');
     Route::delete('/{project:id}', [ProjectController::class, 'destroy'])->name('project.destroy');
     Route::get('/by/user', [ProjectController::class, 'getProjectByUser'])->name('project.by/user');
   });
@@ -76,5 +79,12 @@ Route::prefix('api')->group(function () {
     Route::get('/', [ImageController::class, 'index'])->name('image.index');
     Route::post('/', [ImageController::class, 'store'])->name('image.store');
     Route::delete('/{image:id}', [ImageController::class, 'destroy'])->name('image.destroy');
+  });
+
+  Route::group([
+    'middleware'  => 'auth',
+    'prefix'      => 'users'
+  ], function () {
+    Route::put('/', [UserController::class, 'update'])->name('user.update');
   });
 });

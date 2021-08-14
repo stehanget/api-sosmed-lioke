@@ -25,11 +25,13 @@ class CommentController extends Controller
       try {
         $data = array_merge($request->all(), ['user_id' => Auth::id()]);
 
-        $comment = Comment::create($data);
+        Comment::create($data);
+
+        $data = array_merge($data, ['user' => Auth::user()]);
         
         return response()->json([
             'message' => 'success store a newly created resource in storage',
-            'data' => $comment
+            'data' => $data
         ], Response::HTTP_CREATED);
       } catch (QueryException $e) {
         return response()->json([

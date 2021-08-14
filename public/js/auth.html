@@ -25,6 +25,23 @@
 
           getPortofolio()
 
+          userData = res.data.user
+          userLikeData = res.data.user_likes
+
+          if (userData.photo_profile) {
+            $('.img-profile').attr('src', userData.photo_profile)
+          } else {
+            $('.img-profile').attr('src', 'img/team/team-3.jpg')
+          }
+
+          setPortofolio()
+
+          $('#auth').hide()
+          $('.modal-backdrop').hide()
+          $('.btn-get-started.register-link').hide()
+          $('nav.logged').removeClass('d-none')
+          $('nav.not-logged').addClass('d-none')
+
           Toast.fire({
             icon: 'success',
             title: res.message
@@ -43,6 +60,7 @@
 
     $(document).on('click', '#btn-register', function () {
       const name = $('.box-register #input-name').val()
+      const nickname = $('.box-register #input-nickname').val()
       const email = $('.box-register #input-email').val()
       const phone = $('.box-register #input-phone').val()
       const password = $('.box-register #input-password').val()
@@ -54,7 +72,7 @@
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        data: { name, email, phone, password, password_confirmation },
+        data: { name, nickname, email, phone, password, password_confirmation },
         dataType: 'json',
         beforeSend: function () {
           ToastLoading.fire({
@@ -66,6 +84,8 @@
         },
         success: function (res) {
           Swal.close()
+
+          setLoginForm()
 
           Toast.fire({
             icon: 'success',
