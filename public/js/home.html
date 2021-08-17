@@ -33,10 +33,10 @@
                                 ${userData != null ? portofolio.user.id == userData.id ? '' : `<div class="like btn-update-like" data-project-id="${portofolio.id}"><div class="title-project text-white">${portofolio.title}</div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>` : ''}
                             </div>
                             <div class="card-body px-0 py-2">
-                                <div class="d-flex gap-2">
+                                <div class="d-flex">
                                     <img src="${portofolio.user.photo_profile ? portofolio.user.photo_profile : 'img/team/team-3.jpg'}" class="rounded-circle" width="24"
                                         height="24">
-                                    <span>${portofolio.user.name}</span>
+                                    <span style="width:60%;">${portofolio.user.name}</span>
                                     <div class="feedback ms-auto">
                                         <span  data-bs-toggle="modal" data-bs-target="#view">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>

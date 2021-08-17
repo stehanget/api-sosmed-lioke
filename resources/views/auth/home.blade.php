@@ -8,8 +8,8 @@
         <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
             <div class="row justify-content-center">
                 <div class="col-xl-7 col-lg-9 text-center">
-                    <h1>GooLioooooo</h1>
-                    <h2>Membuat kita sulit dalam apapun :)</h2>
+                    <h1>Lioke</h1>
+                    <h2>Lioke adalah tujuan utama untuk menemukan & memamerkan karya kreatif dan rumah bagi para kreator terbaik dunia</h2>
                 </div>
             </div>
             @if (!Auth::check())

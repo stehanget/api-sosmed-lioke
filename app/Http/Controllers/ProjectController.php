@@ -49,26 +49,11 @@ class ProjectController extends Controller
         'category_id'       => 'required',
         'title'             => 'required|max:64',
         'description'       => 'required',
-        'image'             => 'required|mimes:jpg,jpeg,png'
+        'image'             => 'required'
       ]);
 
       if ($validator->fails()) {
         return response()->json(['message' => $validator->errors()->first()], Response::HTTP_UNPROCESSABLE_ENTITY);
-      }
-
-      if (($total_image = $request->total_image) > 1) {
-        for ($i = 1; $i < $total_image; $i++) {
-          $image = [];
-          array_push($image, $request->file('image' . $i));
-
-          $validator_image = Validator::make($image, [
-            'image' . $i    => 'mimes:jpg,jpeg,png'
-          ]);
-
-          if ($validator_image->fails()) {
-            return response()->json(['message' => $validator->errors()->first()], Response::HTTP_UNPROCESSABLE_ENTITY);
-          }
-        }
       }
 
       try {
@@ -81,41 +66,37 @@ class ProjectController extends Controller
 
         $project = Project::create($dataProject);
 
-        $image = $request->file('image');
-        $image = env('APP_URL') . '/' . $image->store('images/projects');
+        $image = explode(',', $request->image);
+        $total_image = count($image);
 
-        $image = Image::insert([
+        Image::insert([
           'project_id'  => $project->id,
-          'source'      => $image,
+          'source'      => $image[0],
           'created_at'  => \Carbon\Carbon::now(),
           'updated_at'  => \Carbon\Carbon::now()
         ]);
 
-        if (($total_image = $request->total_image) > 1) {
+        if ($total_image > 1) {
           $data = [];
 
-          for ($i = 0; $i < $total_image; $i++) {
-            if ($request->hasFile('image' . $i)) {
-              $image = $request->file('image' . $i);
-              $image = env('APP_URL') . '/' . $image->store('images/projects');
-              
+          for ($i = 1; $i < $total_image; $i++) {  
               array_push($data, [
                 'project_id'  => $project->id,
-                'source'      => $image,
+                'source'      => $image[$i],
                 'created_at'  => \Carbon\Carbon::now(),
                 'updated_at'  => \Carbon\Carbon::now()
               ]);
-            }
           }
 
-          $image = Image::insert($data);
+          Image::insert($data);
         }
 
         $dataProject = array_merge($dataProject, [
-          'id'       => $project->id,
-          'images'   => $project->images,
-          'comments' => $project->comments,
-          'user'     => $project->user,
+          'id'          => $project->id,
+          'images'      => $project->images,
+          'comments'    => $project->comments,
+          'user'        => $project->user,
+          'category'    => $project->category,
           'visibility'  => 0,
           'total_view'  => 0,
           'total_like'  => 0
@@ -189,11 +170,6 @@ class ProjectController extends Controller
         $comments = Comment::where('project_id', $project->id)->get();
 
         foreach ($images as $image) {
-          $base = explode('/', $image->source);
-          $path = end($base);
-
-          Storage::delete('images/projects' . $path);
-
           $image->delete();
         }
 

@@ -29,6 +29,8 @@ body {
 
 .feedback {
   color: grey;
+  width: max-content;
+  text-align: right;
 }
 
 a {
@@ -1085,6 +1087,7 @@ section {
   flex-wrap: nowrap;
   overflow: auto;
   display: flex;
+  margin: 0  0 16px 16px;
 }
 
 .portfolio #portfolio-flters li {
@@ -1969,6 +1972,122 @@ section {
 
 #row-portofolio .card-header:hover .like {
   opacity: 1;
+}
+
+/* .upload-pos {
+  right: 1.1rem;
+  top: 3rem;
+}
+
+.upload-ico {
+  background-color: #006d77;
+  color: white;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  line-height: 1.7;
+} */
+
+#shortcut-btn {
+  position: fixed;
+  top: 0rem;
+  right: 0.7rem;
+}
+
+#shortcut-btn .feather {
+  width: 20px;
+  height: 20px;
+}
+
+#shortcut-btn svg {
+  transition: all .8s linear;
+}
+
+#shortcut-list {
+  position: fixed;
+  top: 3.5rem;
+  right: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  display: none;
+}
+
+#shortcut-btn, #shortcut-list a {
+  margin-bottom: 1rem;
+  cursor: pointer;
+  background: linear-gradient(120deg, #006d77, #04c9db);
+  background-size: 150%;
+  height: 2.5rem;
+  width: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all .8s ease;
+}
+
+#shortcut-btn:hover, #shortcut-list a:hover {
+  background-position: right;
+}
+
+#shortcut-list a {
+  opacity: 0;
+}
+
+#shortcut-list .desc {
+  color: #006d77;
+  background: url('../img/bg-desc.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: 48px;
+  width: 120px;
+  text-align: center;
+  padding: 4px 12px;
+  opacity: 0;
+  transition: opacity 1s ease;
+  display: none;
+  animation-name: fadeLeft;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+#shortcut-list a svg#off {
+  display: none;
+}
+
+.animation-fade-down, .animation-fade-up {
+  animation-name: fadeDown;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  transition: all 1s ease;
+  transform: translateY(-20px);
+}
+
+.animation-fade-up {
+  animation-direction: reverse;
+}
+
+@keyframes fadeDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @media (max-width: 768px) {

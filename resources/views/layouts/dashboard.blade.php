@@ -66,9 +66,11 @@
             if (Auth::check()) {
                 $likes = Session::get('like');
 
-                foreach ($likes as $like) {
-                    if ($like['user_id'] == Auth::id()) {
-                        array_push($userLikes, $like['project_id']);
+                if ($likes) {
+                    foreach ($likes as $like) {
+                        if ($like['user_id'] == Auth::id()) {
+                            array_push($userLikes, $like['project_id']);
+                        }
                     }
                 }
             }
