@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Home')
+@section('title', 'Home - LIOKE')
 
 @section('content')
     <!-- ======= Hero Section ======= -->

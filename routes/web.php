@@ -26,6 +26,10 @@ use App\Http\Controllers\{
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('categories', [CategoryController::class, 'index'])->name('category.index');
 
+Route::get('portfolio', function () {
+  return view('portfolio.index');
+})->name('portfolio');
+
 //Home visitor are logged in
 Route::get('dashboard', function () {
   return view('dashboard.index');
