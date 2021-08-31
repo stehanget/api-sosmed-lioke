@@ -24,7 +24,7 @@
 
     <main id="main">
         <!-- ======= Portfolio Section ======= -->
-        <section id="portfolio" class="portfolio">
+        <section id="portfolio" class="portfolio pt-0">
             <div class="container-fluid" data-aos="fade-up">
                 <div class="row" data-aos="fade-up" data-aos-delay="150">
                     <div class="col-lg-12 d-flex justify-content-between">

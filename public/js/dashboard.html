@@ -388,6 +388,9 @@
         
         $('#project-category').find(`option[value="1"]`).attr('selected', true)
         $('#upload-files').parent().show()
+        $('#holder').show()
+        $('#holder img').remove()
+        $('#upload-files, #file-name').val('')
     })
 
     $(document).on('click', '.filter-portofolio', function () {

@@ -5,10 +5,10 @@
 @section('content')
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center">
-        <div class="container-fluid position-relative" data-aos="fade-up" data-aos-delay="100">
+        <div class="container-fluid position-relative mt-md-3 ms-md-5" data-aos="fade-up" data-aos-delay="100">
             <div class="row">
                 <div class="col text-center text-sm-start d-sm-flex">
-                    <img class="img-profile rounded-circle w-25" src="{{ Auth::user()->photo_profile ? Auth::user()->photo_profile : asset('img/team/team-3.jpg') }}" alt="">
+                    <img class="img-profile rounded-circle" src="{{ Auth::user()->photo_profile ? Auth::user()->photo_profile : asset('img/team/team-3.jpg') }}" alt="">
                     <div class="d-flex-column align-self-center ms-sm-4">
                         <h1>{{ Auth::user()->name }}</h1>
                         <h2>{{ Auth::user()->email }}</h2>
@@ -44,7 +44,7 @@
 
     <main id="main">
         <!-- ======= Portfolio Section ======= -->
-        <section id="portfolio" class="portfolio">
+        <section id="portfolio" class="portfolio pt-0">
             <div class="container-fluid" data-aos="fade-up">
                 <div class="row" data-aos="fade-up" data-aos-delay="150">
                     <div class="col-lg-12 d-flex justify-content-between">

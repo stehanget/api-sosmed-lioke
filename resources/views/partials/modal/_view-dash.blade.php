@@ -3,7 +3,7 @@
         <div class="modal-content animate__animated animate__fadeIn">
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-12 col-md-7 feed mb-4 mb-md-0">
+                    <div class="col-12 col-lg-7 feed mb-4 mb-lg-0">
 
                         <div id="image-feed" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
                             <div class="carousel-indicators">
@@ -37,7 +37,7 @@
                             </button>
                         </div>
                     </div>
-                    <div id="content-feed" class="col-12 col-md-5 border-md-start d-flex flex-column">
+                    <div id="content-feed" class="col-12 col-lg-5 border-md-start d-flex flex-column">
                         <div class="d-flex mb-3">
                             <span class="avatar me-2">
                                 <img class="rounded-circle w-100" src="{{ asset('img/team/team-3.jpg') }}" alt="">

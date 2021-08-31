@@ -15,7 +15,7 @@
                         <option value="{{ $category->id }}">{{ $category->title }}</option>
                     @endforeach
                 </select>
-                <div id="holder" style="margin: 15px 0; max-height: 100px;"></div>
+                <div id="holder" style="margin: 15px 0; max-height: 10rem;display: flex; gap: 16px;"></div>
                 <div class="input-group mb-3" id="lfm" data-input="upload-files" data-preview="holder" data-fname="file-name">
                     <span class="input-group-btn">
                         <a class="btn btn-get-started m-0" style="border-radius: 5px 0 0 5px;">

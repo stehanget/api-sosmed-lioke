@@ -1961,6 +1961,12 @@ section {
     top: 16px;
 }
 
+#hero .img-profile {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+
 #row-portofolio .like .feather {
   width: 40px;
     height: 40px;
@@ -1973,20 +1979,6 @@ section {
 #row-portofolio .card-header:hover .like {
   opacity: 1;
 }
-
-/* .upload-pos {
-  right: 1.1rem;
-  top: 3rem;
-}
-
-.upload-ico {
-  background-color: #006d77;
-  color: white;
-  width: 32px;
-  height: 32px;
-  text-align: center;
-  line-height: 1.7;
-} */
 
 #shortcut-btn {
   position: fixed;
@@ -2068,6 +2060,10 @@ section {
   animation-direction: reverse;
 }
 
+#holder img {
+  height: 10rem !important;
+}
+
 @keyframes fadeDown {
   0% {
     opacity: 0;
@@ -2090,6 +2086,11 @@ section {
   }
 }
 
+@media (max-width: 992px) {
+  #view .comment {
+    height: 200px;
+  }
+}
 @media (max-width: 768px) {
   #portfolio-flters {
     display: none;
@@ -2100,12 +2101,8 @@ section {
   .dropdown.porto {
     display: block !important;
   }
-}
-
-@media (max-width: 425px) {
-  #hero .img-profile {
-    width: 100px !important;
-    height: 100px;
+  #view .feed img {
+    height: 100%;
   }
 }
 
