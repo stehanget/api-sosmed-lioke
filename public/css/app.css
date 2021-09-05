@@ -168,7 +168,8 @@ a:hover {
 }
 
 #header .logo {
-  font-size: 28px;
+  font-size: x-large;
+  text-transform: uppercase;
   margin: 0;
   padding: 0;
   line-height: 1;
@@ -178,6 +179,7 @@ a:hover {
 
 #header .logo a {
   color: #16507b;
+  font-weight: bold;
 }
 
 #header .logo img {
@@ -434,7 +436,8 @@ a:hover {
 
 #hero h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: xxx-large;
+  text-transform: uppercase;
   font-weight: 700;
   line-height: 72px;
   color: #124265;
@@ -1082,7 +1085,6 @@ section {
   padding: 0;
   list-style: none;
   text-align: center;
-  border-radius: 50px;
   padding: 2px 15px;
   flex-wrap: nowrap;
   overflow: auto;
@@ -1946,13 +1948,8 @@ section {
   transition: all .8s;
 }
 
-.total-like .feather-heart {
-  color: red;
-  fill: red;
-}
-
-.feedback .feather-eye {
-  color: blue;
+.feedback .feather-heart, .feedback .feather-eye, .feedback .feather-message-circle, .feedback small {
+  color: #006D77;
 }
 
 .title-project {
@@ -2084,6 +2081,66 @@ section {
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+#row-portofolio .card-header, #row-portofolio .btn-rocket {
+  cursor: pointer;
+}
+
+.search input {
+  border-radius: .25rem 0 0 .25rem;
+}
+
+.search .form-control:focus {
+  box-shadow: none;
+}
+
+.search .btn-search {
+  width: 40px;
+  text-align: center;
+  background: #006d77;
+  color: white;
+  padding: .375rem .75rem;
+  border-radius: 0 .25rem .25rem 0;
+  border: 1px solid #006d77;
+}
+
+.search .profile-search {
+  position: absolute;
+  top: 4rem;
+  align-items: center;
+  font-size: 14px;
+  width: 268px;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0px 0px 10px 0px rgba(102,102,102,0.25);
+-webkit-box-shadow: 0px 0px 10px 0px rgba(102,102,102,0.25);
+-moz-box-shadow: 0px 0px 10px 0px rgba(102,102,102,0.25);
+}
+
+.search .profile-search .row {
+  margin: 0;
+  color: #111;
+}
+
+.search .profile-search .row:hover {
+  background-color: #83C5BE;
+  color: white;
+}
+
+.search .profile-img {
+  padding: 0;
+}
+
+.search .profile-img img {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin: .5rem;
+}
+
+.search .profile-name {
+  align-self: center;
 }
 
 @media (max-width: 992px) {

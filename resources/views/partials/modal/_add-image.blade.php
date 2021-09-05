@@ -26,7 +26,7 @@
                     <input id="file-name" class="form-control" type="text" disabled>
                 </div>
                 <div class="form__files-container" id="files-list-container"></div>
-                <button id="btn-submit-img" class="btn btn-get-started btn-submit-img w-100 mt-0" data-bs-dismiss="modal">SUBMIT</button>
+                <button id="btn-submit-img" class="btn btn-get-started btn-submit-img ms-auto mt-4 d-block" data-bs-dismiss="modal">SUBMIT</button>
             </div>
         </div>
     </div>

@@ -40,7 +40,7 @@
                     <div id="content-feed" class="col-12 col-lg-5 border-md-start d-flex flex-column">
                         <div class="d-flex mb-3">
                             <span class="avatar me-2">
-                                <img class="rounded-circle w-100" src="{{ asset('img/team/team-3.jpg') }}" alt="">
+                                <img class="rounded-circle w-100 h-100" src="{{ asset('img/team/team-3.jpg') }}" alt="">
                             </span>
                             <span class="user">user pembuat</span>
                         </div>

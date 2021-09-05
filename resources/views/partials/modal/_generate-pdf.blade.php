@@ -45,7 +45,8 @@
                 <input type="number" id="total-profit" class="form-control mb-3"
                     placeholder="Tulis total profit anda disini">
                 <div class="form__files-container" id="files-list-container"></div>
-                <button id="btn-submit-img" class="btn btn-get-started btn-submit-img w-100 mt-0" data-bs-dismiss="modal">SUBMIT</button>
+                {{-- <button id="btn-submit-img" class="btn btn-get-started btn-submit-img w-100 mt-0" data-bs-dismiss="modal">SUBMIT</button> --}}
+                <a href="{{ route('portfolio') }}" class="btn btn-get-started btn-submit-img mt-3 float-end" target="_blank">Submit</a>
             </div>
         </div>
     </div>
