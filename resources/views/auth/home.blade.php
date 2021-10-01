@@ -54,5 +54,6 @@
     @php
     include 'js/home.html';
     include 'js/auth.html';
+    include 'js/search.html';
     @endphp
 @endpush

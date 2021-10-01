@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Project;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -23,12 +24,20 @@ class UserController extends Controller
       ], Response::HTTP_OK);
     }
 
-    public function profile()
+    public function profile(User $user)
     {
-      return response()->json([
-        'message' => 'success display the specified resource',
-        'data' => Auth::user()
-      ], Response::HTTP_OK);
+      $projects = Project::select('id', 'title', 'user_id', 'category_id', 'description', 'total_like', 'total_view')
+                    ->with(['comments.user','category:id,title', 'user:id,name,photo_profile'])
+                    ->with(array('images' => function ($query) {
+                      $query->select('id', 'project_id', 'source');
+                    }))
+                    ->where('visibility', true)
+                    ->where('user_id', $user->id)
+                    ->get();
+      return view('dashboard.profile', [
+        'user'      => $user,
+        'projects'  => $projects
+      ]);
     }
 
     public function update(Request $request)
@@ -89,6 +98,22 @@ class UserController extends Controller
         return response()->json([
           'message' => 'success update the specified resource in storage',
           'data' => $user
+        ], Response::HTTP_OK);
+      } catch (QueryException $e) {
+        return response()->json([
+          'message' => 'failed ' . $e->errorInfo
+        ]);
+      }
+    }
+
+    public function search($nickname)
+    {
+      try {
+        $result = User::where('nickname', 'like', '%' . $nickname . '%')->select('name', 'nickname', 'photo_profile')->get();
+
+        return response()->json([
+          'message' => 'success display the specified resource',
+          'data' => $result
         ], Response::HTTP_OK);
       } catch (QueryException $e) {
         return response()->json([

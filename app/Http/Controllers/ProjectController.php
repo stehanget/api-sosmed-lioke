@@ -19,7 +19,7 @@ class ProjectController extends Controller
     {
       if (Auth::check()) {
         $projects = Project::select('id', 'title', 'user_id', 'category_id', 'description', 'total_like', 'total_view')
-                    ->with(['comments.user','category:id,title', 'user:id,name,photo_profile'])
+                    ->with(['comments.user','category:id,title', 'user:id,name,photo_profile,nickname'])
                     ->with(array('images' => function ($query) {
                       $query->select('id', 'project_id', 'source');
                     }))
@@ -27,7 +27,7 @@ class ProjectController extends Controller
                     ->get();
       } else {
         $projects = Project::select('id', 'title', 'user_id', 'category_id', 'description', 'total_like', 'total_view')
-                    ->with(['comments.user','category:id,title', 'user:id,name,photo_profile'])
+                    ->with(['comments.user','category:id,title', 'user:id,name,photo_profile,nickname'])
                     ->with(array('images' => function ($query) {
                       $query->select('id', 'project_id', 'source');
                     }))
@@ -225,6 +225,37 @@ class ProjectController extends Controller
           $project->save();
           
           return Session::get('like');
+        }
+        
+      }
+    }
+
+    public function updateView(Project $project)
+    {
+      if ($project->user_id != Auth::id()) {
+        if (!Session::get('view')) {
+          Session::push('view', ['project_id' => $project->id, 'user_id' => Auth::id()]);
+          $project->increment('total_view');
+          $project->save();
+          
+          return Session::get('view');
+        }
+
+        $views = Session::get('view');
+        $userView = [];
+
+        foreach ($views as $view) {
+          if ($view['user_id'] == Auth::id()) {
+            array_push($userView, $view['project_id']);
+          }
+        }
+
+        if (!(in_array($project->id, $userView))) {
+          Session::push('view', ['project_id' => $project->id, 'user_id' => Auth::id()]);
+          $project->increment('total_view');
+          $project->save();
+          
+          return Session::get('view');
         }
         
       }

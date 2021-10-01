@@ -113,9 +113,11 @@
     <script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
     <script type="text/javascript">
-        $('#lfm').filemanager('image')
+        $('.lfm').filemanager('image')
     </script>
     @php
     include 'js/dashboard.html';
+    include 'js/search.html';
+    include 'js/generate-pdf.html';
     @endphp
 @endpush

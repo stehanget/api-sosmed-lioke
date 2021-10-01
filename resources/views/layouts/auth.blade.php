@@ -27,7 +27,7 @@
 
 </head>
 
-<body>
+<body class="pe-0">
 
     @include('partials.header')
 

@@ -41,6 +41,8 @@
           $('.btn-get-started.register-link').hide()
           $('nav.logged').removeClass('d-none')
           $('nav.not-logged').addClass('d-none')
+          $('#input-comment').removeAttr('disabled')
+          $('#btn-store-comment').removeClass('disabled')
 
           Toast.fire({
             icon: 'success',

@@ -1,0 +1,142 @@
+<script>
+    var page = 2
+    var totalProject = 0
+    var totalExp = 0
+
+    const setPrevNextButton = () => {
+        console.log(page)
+        switch (page) {
+            case 2:
+                $('#generate-pdf #btn-previous').hide()
+                $('#generate-pdf #btn-next').show()
+                $('#generate-pdf #btn-submit').hide()
+                $('#generate-pdf #btn-add-more-project').hide()
+                $('#generate-pdf #btn-add-more-exp').hide()
+                break;
+            case 3:
+                $('#generate-pdf #btn-previous').show()
+                $('#generate-pdf #btn-next').show()
+                $('#generate-pdf #btn-submit').hide()
+                $('#generate-pdf #btn-add-more-project').hide()
+                if (totalExp != 1) {
+                    $('#generate-pdf #btn-add-more-exp').show()
+                }
+                break;
+                
+            case 7 + totalExp + totalProject:
+                $('#generate-pdf #btn-previous').show()
+                $('#generate-pdf #btn-next').hide()
+                $('#generate-pdf #btn-submit').show()
+                $('#generate-pdf #btn-add-more-project').hide()
+                $('#generate-pdf #btn-add-more-exp').hide()
+                break;
+                
+            case 5 + totalExp:
+                $('#generate-pdf #btn-previous').show()
+                $('#generate-pdf #btn-next').show()
+                $('#generate-pdf #btn-submit').hide()
+                if(totalProject != 3) {
+                    $('#generate-pdf #btn-add-more-project').show()
+                }
+                $('#generate-pdf #btn-add-more-exp').hide()
+                break;
+
+            default:
+                $('#generate-pdf #btn-previous').show()
+                $('#generate-pdf #btn-next').show()
+                $('#generate-pdf #btn-submit').hide()
+                if ((page >= 5 + totalExp && page <= 5 + totalExp + totalProject) && totalProject != 3) {
+                    $('#generate-pdf #btn-add-more-project').show()
+                } else {
+                    $('#generate-pdf #btn-add-more-project').hide()
+                }
+                $('#generate-pdf #btn-add-more-exp').hide()
+                break;
+        }
+    }
+
+    $(document).on('click', '#generate-pdf #btn-previous', function () {
+        $(`#generate-pdf .page:nth-child(${page})`).hide()
+        $(`#generate-pdf .page:nth-child(${page - 1})`).show()
+        page--
+        setPrevNextButton()
+    })
+
+    $(document).on('click', '#generate-pdf #btn-next', function () {
+        $(`#generate-pdf .page:nth-child(${page})`).hide()
+        $(`#generate-pdf .page:nth-child(${page + 1})`).show()
+        page++
+        setPrevNextButton()
+    })
+
+    $(document).on('click', '#generate-pdf #btn-add-more-exp', function () {
+        totalExp++
+        let html = `
+        <div class="page" style="display:none;">
+            <label for="work-place" class="form-label">Perusahaan</label>
+            <input type="text" id="work-place" name="work-place[${totalExp + 1}]" class="form-control mb-3"
+                placeholder="Tulis perusahaan anda disini">
+            <label for="work-city" class="form-label">Lokasi Perusahaan</label>
+            <input type="text" id="work-city" name="work-city[${totalExp + 1}]" class="form-control mb-3"
+                placeholder="Tulis lokasi perusahaan anda disini">
+            <div class="row">
+                <div class="col-6">
+                    <label for="year-start" class="form-label">Tahun Masuk</label>
+                    <input type="text" id="year-start" name="year-start[${totalExp + 1}]" class="form-control mb-3"
+                        placeholder="Tulis tahun masuk anda disini">
+                </div>
+                <div class="col-6">
+                    <label for="year-end" class="form-label">Tahun Keluar</label>
+                    <input type="text" id="year-end" name="year-end[${totalExp + 1}]" class="form-control mb-3"
+                        placeholder="Tulis tahun keluar anda disini">
+                </div>
+            </div>
+            <label for="desc-exp" class="form-label">Deskripsi Pengalaman</label>
+            <textarea id="desc-exp" name="desc-exp[${totalExp + 1}]" class="form-control mb-3" rows="5"
+                placeholder="Tulis deskripsi pengalaman anda disini"></textarea>
+        </div>
+        `
+
+        $(html).insertAfter(`#generate-pdf .page:nth-child(${3 + totalExp - 1})`)
+
+        $(`#generate-pdf .page:nth-child(${page})`).hide()
+        $(`#generate-pdf .page:nth-child(${3 + totalExp})`).show()
+        page = 3 + totalExp
+        setPrevNextButton()
+    })
+
+    $(document).on('click', '#generate-pdf #btn-add-more-project', function () {
+        totalProject++
+        let html = `
+            <div class="page" style="display:none;">
+                <label for="project-name" class="form-label">Nama Project</label>
+                <input type="text" id="project-name" name="project-name[${totalProject + 1}]" class="form-control mb-3"
+                    placeholder="Tulis nama project anda disini">
+                <label for="desc-project" class="form-label">Deskripsi Project</label>
+                <textarea id="desc-project" name="desc-project[${totalProject + 1}]" class="form-control mb-3" rows="5"
+                    placeholder="Tulis deskripsi project anda disini"></textarea>
+                <div id="holder-project-${totalProject + 1}" style="margin: 15px 0; max-height: 10rem;display: flex; gap: 16px;"></div>
+                <div class="lfm input-group mb-3" id="lfm" data-input="upload-project-${totalProject + 1}" data-preview="holder-project-${totalProject + 1}" data-fname="file-project-name-${totalProject + 1}">
+                    <span class="input-group-btn">
+                        <a class="btn btn-get-started m-0" style="border-radius: 5px 0 0 5px;">
+                        <i class="fa fa-picture-o"></i> Choose
+                        </a>
+                    </span>
+                    <input id="upload-project-${totalProject + 1}" class="form-control" type="hidden" name="filepath[${totalProject + 1}]">
+                    <input id="file-project-name-${totalProject + 1}" class="form-control" type="text" disabled>
+                </div>
+            </div>
+        `
+
+        $(html).insertAfter(`#generate-pdf .page:nth-child(${5 + totalExp + totalProject - 1})`)
+
+        $(`#generate-pdf .page:nth-child(${page})`).hide()
+        $(`#generate-pdf .page:nth-child(${5 + totalExp + totalProject})`).show()
+        page = 5 + totalExp + totalProject
+        setPrevNextButton()
+    })
+
+    $(document).ready(function () {
+        setPrevNextButton()
+    })
+</script>

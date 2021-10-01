@@ -437,7 +437,6 @@ a:hover {
 #hero h1 {
   margin: 0;
   font-size: xxx-large;
-  text-transform: uppercase;
   font-weight: 700;
   line-height: 72px;
   color: #124265;
@@ -1964,7 +1963,7 @@ section {
   object-fit: cover;
 }
 
-#row-portofolio .like .feather {
+#row-portofolio .like svg {
   width: 40px;
     height: 40px;
     position: absolute;
@@ -2103,6 +2102,7 @@ section {
   padding: .375rem .75rem;
   border-radius: 0 .25rem .25rem 0;
   border: 1px solid #006d77;
+  cursor: pointer;
 }
 
 .search .profile-search {

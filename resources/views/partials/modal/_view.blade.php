@@ -1,4 +1,4 @@
-<div class="modal fade" id="view" tabindex="-1" aria-labelledby="viewLabel" aria-hidden="true">
+<div class="modal fade pe-0" id="view" tabindex="-1" aria-labelledby="viewLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content animate__animated animate__fadeIn">
             <div class="modal-body">
@@ -39,10 +39,12 @@
                     </div>
                     <div id="content-feed" class="col-12 col-lg-5 border-md-start d-flex flex-column">
                         <div class="d-flex mb-3">
-                            <span class="avatar me-2">
-                                <img class="rounded-circle w-100 h-100" src="{{ asset('img/team/team-3.jpg') }}" alt="">
-                            </span>
-                            <span class="user">user pembuat</span>
+                            <a href="#" id="current-user-portofolio">
+                                <span class="avatar me-2">
+                                    <img class="rounded-circle" src="{{ asset('img/team/team-3.jpg') }}" width="24" height="24" style="object-fit: cover;" alt="">
+                                </span>
+                                <span class="user text-dark">user pembuat</span>
+                            </a>
                         </div>
                         <div class="comment">
                             Category : <span class="category">anim</span>
