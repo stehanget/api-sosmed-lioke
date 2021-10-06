@@ -6,6 +6,7 @@
                     @csrf
 
                     <div class="page">
+                        <h3 class="m-0 mb-3 fw-bold">Introduction</h3>
                         <label for="name" class="form-label">Nama Lengkap</label>
                         <input type="text" id="name" name="name" class="form-control mb-3"
                             placeholder="Tulis nama lengkap anda disini">
@@ -20,6 +21,7 @@
                             placeholder="Tulis deskripsi diri anda disini" maxlength="255"></textarea>
                     </div>
                     <div class="page" style="display:none;">
+                        <h3 class="m-0 mb-3 fw-bold">Key Competencies</h3>
                         <label for="work-place" class="form-label">Perusahaan</label>
                         <input type="text" id="work-place" name="work-place[1]" class="form-control mb-3"
                             placeholder="Tulis perusahaan anda disini">
@@ -43,6 +45,7 @@
                             placeholder="Tulis deskripsi pengalaman anda disini"></textarea>
                     </div>
                     <div class="page" style="display:none;">
+                        <h3 class="m-0 mb-3 fw-bold">Soft Skills and Hard Skills</h3>
                         <label for="hard-skill" class="form-label">Hard Skill</label>
                         <input type="text" id="hard-skill" name="hard-skill[1]" class="form-control mb-3"
                             placeholder="Tulis hard skill anda disini">
@@ -56,9 +59,22 @@
                         <input type="text" id="soft-skill-3" name="soft-skill[3]" class="form-control mb-3"
                             placeholder="Tulis soft skill anda disini (opsional)">
                     </div>
-                    {{-- TODO: menambahkan inputan work benefit --}}
-                    {{-- TODO: mengganti id input file dan kawan kawannya --}}
                     <div class="page" style="display:none;">
+                        <h3 class="m-0 mb-3 fw-bold">Team Work</h3>
+                        <label for="reason" class="form-label">Reason</label>
+                        <input type="text" id="reason" name="reason[1]" class="form-control mb-3"
+                            placeholder="Tulis alasan anda disini">
+                        <input type="text" id="reason" name="reason[2]" class="form-control mb-3"
+                            placeholder="Tulis alasan anda disini (opsional)">
+                        <input type="text" id="reason" name="reason[3]" class="form-control mb-3"
+                            placeholder="Tulis alasan anda disini (opsional)">
+                        <input type="text" id="reason" name="reason[4]" class="form-control mb-3"
+                            placeholder="Tulis alasan anda disini (opsional)">
+                        <input type="text" id="reason" name="reason[5]" class="form-control mb-3"
+                            placeholder="Tulis alasan anda disini (opsional)">
+                    </div>
+                    <div class="page" style="display:none;">
+                        <h3 class="m-0 mb-3 fw-bold">My Project</h3>
                         <label for="project-name" class="form-label">Nama Project</label>
                         <input type="text" id="project-name" name="project-name[1]" class="form-control mb-3"
                             placeholder="Tulis nama project anda disini">
@@ -77,6 +93,7 @@
                         </div>
                     </div>
                     <div class="page" style="display:none;">
+                        <h3 class="m-0 mb-3 fw-bold">Testimoni</h3>
                         <label for="total-client" class="form-label">Total Client</label>
                         <input type="number" id="total-client" name="total-client" class="form-control mb-3"
                             placeholder="Tulis total client anda disini">

@@ -113,7 +113,7 @@
     <script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
     <script type="text/javascript">
-        $('.lfm').filemanager('image')
+        $(document).find('.lfm').filemanager('image')
     </script>
     @php
     include 'js/dashboard.html';

@@ -309,7 +309,7 @@
             <div class="row mt-3">
                 <div class="col"><h3 class="text-primary fw-bold text-end">Hard Skills</h3></div>
             </div>
-            <div class="row row-cols-1 justify-content-end hard-skill">
+            <div class="row row-cols-1 flex-column align-items-end hard-skill">
                 @foreach ($hard_skills as $hard_skill)
                     <div class="col">{{ $hard_skill }}</div>
                 @endforeach
@@ -320,7 +320,7 @@
             </div>
             <div class="row justify-content-center soft-skill">
                 @foreach ($soft_skills as $soft_skill)
-                    <div class="col">
+                    <div class="col text-center">
                         <span>{{ $soft_skill }}</span>
                         <div class="text-center bg-primary rounded-circle num-soft-skill">0{{ $loop->iteration }}</div>
                     </div>
@@ -345,46 +345,15 @@
                 </div>
             </div>
             <div class="row row-cols-3 justify-content-center">
-                <div class="col">
-                    <div class="card reason">
-                        <div class="card-body">
-                            <h5 class="card-title">1st Reason Title</h5>
-                            <p class="card-text">why why why why why shy shy</p>
+                @foreach ($reasons as $reason)
+                    <div class="col">
+                        <div class="card reason">
+                            <div class="card-body">
+                                <p class="card-text">{{ $reason }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card reason">
-                        <div class="card-body">
-                            <h5 class="card-title">2nd Reason Title</h5>
-                            <p class="card-text">why why why why why shy shy</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card reason">
-                        <div class="card-body">
-                            <h5 class="card-title">3rd Reason Title</h5>
-                            <p class="card-text">why why why why why shy shy</p>
-                        </div>
-                        </div>
-                </div>
-                <div class="col">
-                    <div class="card reason">
-                        <div class="card-body">
-                            <h5 class="card-title">4th Reason Title</h5>
-                            <p class="card-text">why why why why why shy shy</p>
-                        </div>
-                        </div>
-                </div>
-                <div class="col">
-                    <div class="card reason">
-                        <div class="card-body">
-                            <h5 class="card-title">5th Reason Title</h5>
-                            <p class="card-text">why why why why why shy shy</p>
-                        </div>
-                        </div>
-                </div>
+                @endforeach
             </div>
             <div class="num-page d-flex ms-auto justify-content-end">
                 <div></div>
@@ -393,135 +362,68 @@
         </div>
     </div>
 
-    <div class="page">
-        <div class="subpage" id="my-project">
-            <div class="row">
-                <div class="col">
-                    <h3 class="fw-bold">My Project</h3>
-                </div>
-            </div>
-            <div class="row my-3">
-                <div class="col">
-                    <div style="position: relative; display: flex; flex-direction: column; align-items: center;">
-                        <svg viewBox="0 0 536 257" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: -8px;">
-                            <g filter="url(#filter0_d)">
-                                
-                            </g>
-                            <path d="M9.47339 19.1328C9.47339 11.9531 15.2937 6.13281 22.4734 6.13281H513.839C521.019 6.13281 526.839 11.9531 526.839 19.1328V26.1328H9.47339V19.1328Z" fill="#E8E8E8"/>
-                            <circle cx="32.8799" cy="16.1328" r="4" fill="#FF6057"/>
-                            <circle cx="48.8799" cy="16.1328" r="4" fill="#FFBD2E"/>
-                            <circle cx="64.8799" cy="16.1328" r="4" fill="#28CB42"/>
-                            <defs>
-                                <filter id="filter0_d" x="0.473389" y="0.132812" width="535.366" height="255.963" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                                    <feOffset dy="3"/>
-                                    <feGaussianBlur stdDeviation="4.5"/>
-                                    <feComposite in2="hardAlpha" operator="out"/>
-                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.18 0"/>
-                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-                                </filter>
-                            </defs>
-                        </svg>
-                        <img src="{{ Auth::user()->photo_profile }}" alt="" width="617.75" height="255.963" style="object-fit: cover; border-radius: 15px;">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col num-my-project d-flex">
-                    <div></div>
-                    <div>
-                        <span>1st section’s title</span>
-                        <p class="my-project-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae molestie tristique pharetra cursus . Leo dolor nunc egestas tristique odio a suspendisse donec et.</p>
-                    </div>
-                </div>                
-            </div>
+    @php
+        $total_projects = 0;
+    @endphp
 
-            <div class="row my-3">
-                <div class="col">
-                    <svg viewBox="0 0 536 257" fill="none" xmlns="http://www.w3.org/2000/svg">
+    @foreach ($projects as $project)
+        @php
+            $total_projects++;
+        @endphp
+
+        @if ($loop->index == 0 || $loop->index == 2)
+            <div class="page">
+                <div class="subpage" id="my-project">
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="fw-bold">My Project</h3>
+                        </div>
+                    </div>
+        @endif
+
+        <div class="row my-3">
+            <div class="col">
+                <div style="position: relative; display: flex; flex-direction: column; align-items: center;">
+                    <svg viewBox="0 0 536 257" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: -8px;">
                         <g filter="url(#filter0_d)">
-                        <rect x="9.47339" y="6.13281" width="517.366" height="237.963" rx="13" fill="white"/>
-                        <rect x="9.97339" y="6.63281" width="516.366" height="236.963" rx="12.5" stroke="#E8E8E8"/>
+                            
                         </g>
                         <path d="M9.47339 19.1328C9.47339 11.9531 15.2937 6.13281 22.4734 6.13281H513.839C521.019 6.13281 526.839 11.9531 526.839 19.1328V26.1328H9.47339V19.1328Z" fill="#E8E8E8"/>
                         <circle cx="32.8799" cy="16.1328" r="4" fill="#FF6057"/>
                         <circle cx="48.8799" cy="16.1328" r="4" fill="#FFBD2E"/>
                         <circle cx="64.8799" cy="16.1328" r="4" fill="#28CB42"/>
                         <defs>
-                        <filter id="filter0_d" x="0.473389" y="0.132812" width="535.366" height="255.963" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                        <feOffset dy="3"/>
-                        <feGaussianBlur stdDeviation="4.5"/>
-                        <feComposite in2="hardAlpha" operator="out"/>
-                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.18 0"/>
-                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-                        </filter>
+                            <filter id="filter0_d" x="0.473389" y="0.132812" width="535.366" height="255.963" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                <feOffset dy="3"/>
+                                <feGaussianBlur stdDeviation="4.5"/>
+                                <feComposite in2="hardAlpha" operator="out"/>
+                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.18 0"/>
+                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+                            </filter>
                         </defs>
-                        </svg>
+                    </svg>
+                    <img src="{{ $project->filepath }}" alt="" width="617.75" height="255.963" style="object-fit: cover; border-radius: 15px;">
                 </div>
-            </div>
-            <div class="row">
-                <div class="col num-my-project d-flex">
-                    <div></div>
-                    <div>
-                        <span>2nd section’s title</span>
-                        <p class="my-project-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae molestie tristique pharetra cursus . Leo dolor nunc egestas tristique odio a suspendisse donec et.</p>
-                    </div>
-                </div>                
-            </div>
-            <div class="num-page d-flex ms-auto justify-content-end">
-                <div></div>
-                <span>04 My Project</span>
             </div>
         </div>
-    </div>
-
-    <div class="page">
-        <div class="subpage" id="my-project">
-            <div class="row my-3">
-                <div class="col">
-                    <svg viewBox="0 0 536 257" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g filter="url(#filter0_d)">
-                        <rect x="9.47339" y="6.13281" width="517.366" height="237.963" rx="13" fill="white"/>
-                        <rect x="9.97339" y="6.63281" width="516.366" height="236.963" rx="12.5" stroke="#E8E8E8"/>
-                        </g>
-                        <path d="M9.47339 19.1328C9.47339 11.9531 15.2937 6.13281 22.4734 6.13281H513.839C521.019 6.13281 526.839 11.9531 526.839 19.1328V26.1328H9.47339V19.1328Z" fill="#E8E8E8"/>
-                        <circle cx="32.8799" cy="16.1328" r="4" fill="#FF6057"/>
-                        <circle cx="48.8799" cy="16.1328" r="4" fill="#FFBD2E"/>
-                        <circle cx="64.8799" cy="16.1328" r="4" fill="#28CB42"/>
-                        <defs>
-                        <filter id="filter0_d" x="0.473389" y="0.132812" width="535.366" height="255.963" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                        <feOffset dy="3"/>
-                        <feGaussianBlur stdDeviation="4.5"/>
-                        <feComposite in2="hardAlpha" operator="out"/>
-                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.18 0"/>
-                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-                        </filter>
-                        </defs>
-                        </svg>
+        <div class="row">
+            <div class="col num-my-project d-flex">
+                <div></div>
+                <div>
+                    <span>{{ $project->project_name }}</span>
+                    <p class="my-project-content">{{ $project->desc_project }}</p>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col num-my-project d-flex">
-                    <div></div>
-                    <div>
-                        <span>3rd section’s title</span>
-                        <p class="my-project-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae molestie tristique pharetra cursus . Leo dolor nunc egestas tristique odio a suspendisse donec et.</p>
-                    </div>
-                </div>                
-            </div>
+            </div>                
+        </div>
 
+        @if ($loop->last)
             <div class="row mt-5">
                 <div class="col mt-5">
                     <div class="my-project-ico position-relative">
-                        <span>21</span>
+                        <span>{{ $total_client }}</span>
                         <span>Client</span>
                     </div>
                     <svg viewBox="0 0 141 136" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -545,7 +447,7 @@
                 </div>
                 <div class="col">
                     <div class="my-project-ico position-relative">
-                        <span>32</span>
+                        <span>{{ $total_project }}</span>
                         <span>Project</span>
                     </div>
                     <svg viewBox="0 0 141 136" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -569,7 +471,7 @@
                 </div>
                 <div class="col mt-5">
                     <div class="my-project-ico position-relative">
-                        <span>5jt</span>
+                        <span>{{ $total_profit }}jt</span>
                         <span>Profit</span>
                     </div>
                     <svg viewBox="0 0 141 136" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -592,13 +494,17 @@
                         </svg>                        
                 </div>
             </div>
+        @endif
 
-            <div class="num-page d-flex ms-auto justify-content-end">
-                <div></div>
-                <span>04 My Project</span>
+        @if ($loop->index == 1 || $loop->index == 2)
+                    <div class="num-page d-flex ms-auto justify-content-end">
+                        <div></div>
+                        <span>0{{ $loop->index == 1 ? '4' : '5' }} My Project</span>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+        @endif
+    @endforeach
 
     <div class="page">
         <div class="subpage" id="testimoni">
@@ -611,18 +517,8 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body text-center">
-                          <h5 class="card-title">Kustandy Haryo</h5>
-                          <p class="card-text">Rest areanya sangat menarik dengan banyak toko oleh-oleh khas desa, cocok buat isitirahat saat lelah perjalanan, apalagi bisa pesen dulu sebelum datang</p>
-                        </div>
-                      </div>
-                </div>
-            </div>
-            <div class="row my-3">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body text-center">
-                          <h5 class="card-title">Kustandy Haryo</h5>
-                          <p class="card-text">Rest areanya sangat menarik dengan banyak toko oleh-oleh khas desa, cocok buat isitirahat saat lelah perjalanan, apalagi bisa pesen dulu sebelum datang</p>
+                          <h5 class="card-title">{{ $testimoni_name }}</h5>
+                          <p class="card-text">{{ $testimoni_desc }}</p>
                         </div>
                       </div>
                 </div>
@@ -630,7 +526,7 @@
             
             <div class="num-page d-flex ms-auto justify-content-end">
                 <div></div>
-                <span>05 Testimoni</span>
+                <span>0{{ $total_project >= 1 ? '6' : '5' }} Testimoni</span>
             </div>
         </div>
     </div>

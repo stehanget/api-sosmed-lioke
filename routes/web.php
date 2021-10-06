@@ -31,6 +31,7 @@ Route::post('portfolio', function (\Illuminate\Http\Request $request) {
   $projects = [];
   $hard_skills = [];
   $soft_skills = [];
+  $reasons = [];
 
   foreach ($request->input('work-place') as $key => $value) {
     array_push($work_exps, (object) [
@@ -58,20 +59,25 @@ Route::post('portfolio', function (\Illuminate\Http\Request $request) {
     array_push($soft_skills, $value);
   }
 
+  foreach ($request->input('reason') as $value) {
+    array_push($reasons, $value);
+  }
+  
   return view('portfolio.index', [
     'name'            => $request->name,
     'profesi'         => $request->profesi,
     'instagram'       => $request->instagram,
     'self_desc'       => $request->input('self-desc'),
     'work_exps'       => $work_exps,
-    'hard_skills'     => $request->input('hard-skill'),
-    'soft_skills'     => $request->input('soft-skill'),
+    'hard_skills'     => $hard_skills,
+    'soft_skills'     => $soft_skills,
+    'reasons'         => $reasons,
     'projects'        => $projects,
     'total_client'    => $request->input('total-client'),
     'total_project'   => $request->input('total-project'),
     'total_profit'    => $request->input('total-profit'),
-    'testimoni_name'  => $request->input('testimonial-name'),
-    'testimoni_desc'  => $request->input('testimonial-desc'),
+    'testimoni_name'  => $request->input('testimoni-name'),
+    'testimoni_desc'  => $request->input('testimoni-desc'),
   ]);
   // return response()->json([
   //   'name'            => $request->name,

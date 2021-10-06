@@ -23,7 +23,7 @@
                 }
                 break;
                 
-            case 7 + totalExp + totalProject:
+            case 8 + totalExp + totalProject:
                 $('#generate-pdf #btn-previous').show()
                 $('#generate-pdf #btn-next').hide()
                 $('#generate-pdf #btn-submit').show()
@@ -31,11 +31,11 @@
                 $('#generate-pdf #btn-add-more-exp').hide()
                 break;
                 
-            case 5 + totalExp:
+            case 6 + totalExp:
                 $('#generate-pdf #btn-previous').show()
                 $('#generate-pdf #btn-next').show()
                 $('#generate-pdf #btn-submit').hide()
-                if(totalProject != 3) {
+                if(totalProject != 2) {
                     $('#generate-pdf #btn-add-more-project').show()
                 }
                 $('#generate-pdf #btn-add-more-exp').hide()
@@ -45,7 +45,7 @@
                 $('#generate-pdf #btn-previous').show()
                 $('#generate-pdf #btn-next').show()
                 $('#generate-pdf #btn-submit').hide()
-                if ((page >= 5 + totalExp && page <= 5 + totalExp + totalProject) && totalProject != 3) {
+                if ((page >= 6 + totalExp && page <= 6 + totalExp + totalProject) && totalProject != 2) {
                     $('#generate-pdf #btn-add-more-project').show()
                 } else {
                     $('#generate-pdf #btn-add-more-project').hide()
@@ -128,11 +128,12 @@
             </div>
         `
 
-        $(html).insertAfter(`#generate-pdf .page:nth-child(${5 + totalExp + totalProject - 1})`)
+        $(html).insertAfter(`#generate-pdf .page:nth-child(${6 + totalExp + totalProject - 1})`)
+        $(document).find('.lfm').filemanager('image')
 
         $(`#generate-pdf .page:nth-child(${page})`).hide()
-        $(`#generate-pdf .page:nth-child(${5 + totalExp + totalProject})`).show()
-        page = 5 + totalExp + totalProject
+        $(`#generate-pdf .page:nth-child(${6 + totalExp + totalProject})`).show()
+        page = 6 + totalExp + totalProject
         setPrevNextButton()
     })
 
