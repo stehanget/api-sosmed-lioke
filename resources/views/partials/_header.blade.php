@@ -1,11 +1,11 @@
 <header id="header" class="fixed-top pe-0">
-    <div class="container-fluid d-flex align-items-center justify-content-between">
+    <div class="container d-flex align-items-center justify-content-between">
 
         <h1 class="logo"><a href="/">Lioke</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-        <div class="search d-flex align-items-center">
+        <div class="search d-flex ms-auto me-2">
             <input id="input-search" type="search" class="form-control" placeholder="Search..." autocomplete="off">
             <div class="btn-search">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>

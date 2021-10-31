@@ -7,10 +7,9 @@
                         <div class="col-12 col-md-7 d-none d-md-block p-3 text-white">
                             <div class="row">
                                 <div class="col align-center">
-                                    <h3 class="card-title text-left">Logo</h3>
+                                    <h3 class="card-title text-left">Lioke</h3>
                                     <img src="{{ asset('img/undraw_landing.svg') }}" class="w-50 d-flex m-auto my-5">
-                                    <h5 class="fs-6">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure non
-                                        nostrum quos quis accusamus vel ipsum cumque error voluptatibus sint.
+                                    <h5 class="fs-6">
                                     </h5>
                                 </div>
                             </div>

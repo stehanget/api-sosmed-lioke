@@ -1,5 +1,5 @@
 <div class="modal fade" id="generate-pdf" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content animate__animated animate__fadeIn">
             <div class="modal-body">
                 <form action="{{ route('portfolio') }}" method="post">
@@ -113,10 +113,10 @@
                             placeholder="Tulis deskripsi testimoni anda disini"></textarea>
                     </div>
                     <div class="page-footer d-flex">
-                        <button type="button" id="btn-previous" class="btn btn-get-started me-3 mt-3" style="width:120px;">Previous</button>
+                        <button type="button" id="btn-previous" class="btn btn-get-started me-3 mt-3" style="width:120px;">Before</button>
                         <button type="button" id="btn-add-more-project" class="btn btn-get-started mt-3" style="width:auto;">Add more project</button>
                         <button type="button" id="btn-add-more-exp" class="btn btn-get-started mt-3" style="width:auto;">Add more experience</button>
-                        <button type="button" id="btn-next" class="btn btn-get-started mt-3 ms-auto" style="width:120px;">Next</button>
+                        <button type="button" id="btn-next" class="btn btn-get-started mt-3 ms-auto" style="width:100px; height:">Next</button>
                         <button type="submit" id="btn-submit" class="btn btn-get-started mt-3 ms-auto" style="width:120px;display:none;">Submit</button>
                     </div>
                 </form>

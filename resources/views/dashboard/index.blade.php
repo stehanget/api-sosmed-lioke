@@ -8,11 +8,11 @@
         <div class="container-fluid position-relative mt-md-3 ms-md-5" data-aos="fade-up" data-aos-delay="100">
             <div class="row">
                 <div class="col text-center text-sm-start d-sm-flex">
-                    <img class="img-profile rounded-circle" src="{{ Auth::user()->photo_profile ? Auth::user()->photo_profile : asset('img/team/team-3.jpg') }}" alt="">
+                    <img class="img-profile rounded-circle" style="width: 120px; height: 120px" src="{{ Auth::user()->photo_profile ? Auth::user()->photo_profile : asset('img/team/team-3.jpg') }}" alt="">
                     <div class="d-flex-column align-self-center ms-sm-4">
-                        <h1>{{ Auth::user()->name }}</h1>
-                        <h2>{{ Auth::user()->email }}</h2>
-                        <p><a href="#" class="btn-get-started register-link" data-bs-toggle="modal" data-bs-target="#profile">Edit
+                        <h1 class="" style="height: 50px ;font-size: 32px">{{ Auth::user()->name }}</h1>
+                        <h2 style="font-size: 16px">{{ Auth::user()->email }}</h2>
+                        <p><a href="#" class="register-link" id="btn-1-edit" data-bs-toggle="modal" data-bs-target="#profile">Edit
                             Profile</a></p>
                     </div>
                     <div class="upload-pos position-absolute">

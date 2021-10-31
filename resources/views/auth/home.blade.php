@@ -7,25 +7,33 @@
     <section id="hero" class="d-flex align-items-center">
         <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
             <div class="row justify-content-center">
-                <div class="col-xl-7 col-lg-9 text-center">
-                    <h1>Lioke</h1>
+                <div class="col-xl-6 col-lg-6 text-start">
+                    <h1>Temukan desainer & materi iklan top dunia</h1>
                     <h2>Lioke adalah tujuan utama untuk menemukan & memamerkan karya kreatif dan rumah bagi para kreator terbaik dunia</h2>
+                    @if (!Auth::check())
+                    <div class="text-start">
+                        <a href="#about" class="btn-get-started register-link" data-bs-toggle="modal"
+                            data-bs-target="#auth">Sign
+                            Up</a>
+                    </div>
+                    @endif
                 </div>
+                <div class="col-6 text-end"> <img class="rounded" style="width: 400px; height: 360px;" src="{{ asset('img/testing1.png') }}" alt=""> </div>
             </div>
-            @if (!Auth::check())
-                <div class="text-center">
+            {{-- @if (!Auth::check())
+                <!--<div class="text-center">
                     <a href="#about" class="btn-get-started register-link" data-bs-toggle="modal"
                         data-bs-target="#auth">Sign
                         Up</a>
-                </div>
-            @endif
+                </div>-->
+            @endif --}}
         </div>
     </section><!-- End Hero -->
 
     <main id="main">
         <!-- ======= Portfolio Section ======= -->
         <section id="portfolio" class="portfolio pt-0">
-            <div class="container-fluid" data-aos="fade-up">
+            <div class="container" data-aos="fade-up">
                 <div class="row" data-aos="fade-up" data-aos-delay="150">
                     <div class="col-lg-12 d-flex justify-content-between">
                         <h2>Portfolio</h2>
