@@ -7,6 +7,7 @@
 
                     <div class="page">
                         <h3 class="m-0 mb-3 fw-bold">Introduction</h3>
+                        <h5 class="" style="text-align: end; color: #9A9483; font-size: 16px">Step 1 / 7</h5>
                         <label for="name" class="form-label">Nama Lengkap</label>
                         <input type="text" id="name" name="name" class="form-control mb-3"
                             placeholder="Tulis nama lengkap anda disini">
@@ -22,6 +23,7 @@
                     </div>
                     <div class="page" style="display:none;">
                         <h3 class="m-0 mb-3 fw-bold">Key Competencies</h3>
+                        <h5 class="" style="text-align: end; color: #9A9483; font-size: 16px">Step 2 / 7</h5>
                         <label for="work-place" class="form-label">Perusahaan</label>
                         <input type="text" id="work-place" name="work-place[1]" class="form-control mb-3"
                             placeholder="Tulis perusahaan anda disini">
@@ -46,6 +48,7 @@
                     </div>
                     <div class="page" style="display:none;">
                         <h3 class="m-0 mb-3 fw-bold">Soft Skills and Hard Skills</h3>
+                        <h5 class="" style="text-align: end; color: #9A9483; font-size: 16px">Step 3 / 7</h5>
                         <label for="hard-skill" class="form-label">Hard Skill</label>
                         <input type="text" id="hard-skill" name="hard-skill[1]" class="form-control mb-3"
                             placeholder="Tulis hard skill anda disini">
@@ -61,6 +64,7 @@
                     </div>
                     <div class="page" style="display:none;">
                         <h3 class="m-0 mb-3 fw-bold">Team Work</h3>
+                        <h5 class="" style="text-align: end; color: #9A9483; font-size: 16px">Step 4 / 7</h5>
                         <label for="reason" class="form-label">Reason</label>
                         <input type="text" id="reason" name="reason[1]" class="form-control mb-3"
                             placeholder="Tulis alasan anda disini">
@@ -75,6 +79,7 @@
                     </div>
                     <div class="page" style="display:none;">
                         <h3 class="m-0 mb-3 fw-bold">My Project</h3>
+                        <h5 class="" style="text-align: end; color: #9A9483; font-size: 16px">Step 5 / 7</h5>
                         <label for="project-name" class="form-label">Nama Project</label>
                         <input type="text" id="project-name" name="project-name[1]" class="form-control mb-3"
                             placeholder="Tulis nama project anda disini">
@@ -94,6 +99,7 @@
                     </div>
                     <div class="page" style="display:none;">
                         <h3 class="m-0 mb-3 fw-bold">Testimoni</h3>
+                        <h5 class="" style="text-align: end; color: #9A9483; font-size: 16px">Step 6 / 7</h5>
                         <label for="total-client" class="form-label">Total Client</label>
                         <input type="number" id="total-client" name="total-client" class="form-control mb-3"
                             placeholder="Tulis total client anda disini">
@@ -106,6 +112,7 @@
                     </div>
                     <div class="page" style="display:none;">
                         <label for="testimoni-name" class="form-label">Nama Lengkap Testimoni</label>
+                        <h5 class="" style="text-align: end; color: #9A9483; font-size: 16px">Step 7 / 7</h5>
                         <input type="text" id="testimoni-name" name="testimoni-name" class="form-control mb-3"
                             placeholder="Tulis nama lengkap testimoni anda disini">
                         <label for="testimoni-desc" class="form-label">Deskripsi Testimoni</label>
@@ -113,10 +120,10 @@
                             placeholder="Tulis deskripsi testimoni anda disini"></textarea>
                     </div>
                     <div class="page-footer d-flex">
-                        <button type="button" id="btn-previous" class="btn btn-get-started me-3 mt-3" style="width:120px;">Before</button>
+                        <button type="button" id="btn-previous" class="btn btn-get-started me-3 mt-3" style="width:120px;"><i class="fas fa-arrow-left"></i></button>
                         <button type="button" id="btn-add-more-project" class="btn btn-get-started mt-3" style="width:auto;">Add more project</button>
                         <button type="button" id="btn-add-more-exp" class="btn btn-get-started mt-3" style="width:auto;">Add more experience</button>
-                        <button type="button" id="btn-next" class="btn btn-get-started mt-3 ms-auto" style="width:100px; height:">Next</button>
+                        <button type="button" id="btn-next" class="btn btn-get-started mt-3 ms-auto" style="width:100px; height:"><i class="fas fa-arrow-right"></i></button>
                         <button type="submit" id="btn-submit" class="btn btn-get-started mt-3 ms-auto" style="width:120px;display:none;">Submit</button>
                     </div>
                 </form>

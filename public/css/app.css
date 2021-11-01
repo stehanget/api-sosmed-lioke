@@ -2220,3 +2220,13 @@ section {
   font-size: small;
   height: fit-content;
 }
+
+#btn-previous{
+  background-color: #FFF;
+  color: #006D77;
+}
+
+#btn-next{
+  background-color: #FFF;
+  color: #006D77;
+}
